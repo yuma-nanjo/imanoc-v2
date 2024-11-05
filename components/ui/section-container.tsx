@@ -12,7 +12,6 @@ export interface ISectionPadding {
 
 export interface ISectionContainer {
   color?:
-    | "white"
     | "primary"
     | "secondary"
     | "card"

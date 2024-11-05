@@ -68,11 +68,7 @@ export default function HeroWithImage({
         {image && image.asset?._id && (
           <Image
             className="rounded-xl"
-            src={
-              image.asset?._id === "static"
-                ? "/images/placeholder.svg"
-                : urlFor(image.asset).url()
-            }
+            src={urlFor(image.asset).url()}
             alt={image.alt || ""}
             width={image.asset?.metadata?.dimensions?.width || 800}
             height={image.asset?.metadata?.dimensions?.height || 800}
