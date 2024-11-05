@@ -1,36 +1,54 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Next.js 15 with Sanity CMS Starter Template
 
-## Getting Started
+A Next.js starter template with `Next.js 15`, `Tailwind CSS`, `shadcn/ui`, and `Sanity CMS` with `Live Editing`.
 
-First, run the development server:
+This starter is a part of [Schema UI](https://schemaui.com) project, which is a collection of components for building websites with Sanity CMS.
+
+You can clone the repository and start building your website with the components.
+
+Create a new `Sanity project` at [sanity.io](https://www.sanity.io/manage).
+
+Add `http://localhost:3000` to the `CORS Origins` in your Sanity project settings.
+
+1. Clone the repository:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone git@github.com:sergeycode/next-js-sanity-starter.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Rename the `example.env.local` file to `.env.local` and add your `Sanity project ID` to `NEXT_PUBLIC_SANITY_PROJECT_ID` and `development` dataset to `NEXT_PUBLIC_SANITY_DATASET` to the file.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+cd next-js-sanity-starter
+mv example.env.local .env.local
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. Create and copy token from the `API` section with Viewer permissions in your Sanity project settings.
 
-## Learn More
+4. You can create a demo page with the following command (`development` is the dataset name, make sure you created the `development` dataset in your Sanity project):
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npx sanity dataset import demo.tag.gz development
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+5. Install the dependencies and start the development server:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```bash
+pnpm install
+pnpm dev
+```
 
-## Deploy on Vercel
+6. Open the browser and go to `http://localhost:3000` to see the demo page.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+7. Your Sanity admin is available at `http://localhost:3000/studio`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+8. Once you're ready to deploy your website, make sure you add live url to the `CORS Origins` in your Sanity project settings.
+
+9. If you created `developemnt` dataset, you can export it to the `production` dataset with the following command:
+
+```bash
+npx sanity dataset export development development.tag.gz
+npx sanity dataset import development.tag.gz production
+```
+
+10. Deploy your website to Vercel by creating a new project and adding your `NEXT_PUBLIC_SANITY_PROJECT_ID` and `NEXT_PUBLIC_SANITY_DATASET` dataset to the environment variables.
