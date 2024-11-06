@@ -38,6 +38,13 @@ pnpm install
 pnpm dev
 ```
 
+or with `npm`:
+
+```bash
+npm install
+npm run dev
+```
+
 6. Open the browser and go to `http://localhost:3000` to see the demo page.
 
 7. Your Sanity admin is available at `http://localhost:3000/studio`.
