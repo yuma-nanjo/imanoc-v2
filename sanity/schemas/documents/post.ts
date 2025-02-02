@@ -1,5 +1,6 @@
 import { defineField, defineType } from "sanity";
 import { FileText } from "lucide-react";
+import { isUniqueOtherThanLanguage } from "@/lib/is-unique-lang";
 
 export default defineType({
   name: "post",
@@ -22,6 +23,21 @@ export default defineType({
   ],
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      group: "settings",
+      hidden: false,
+      initialValue: "en",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Spanish", value: "es" },
+          { title: "French", value: "fr" },
+        ],
+      },
+    }),
+    defineField({
       name: "title",
       title: "Title",
       type: "string",
@@ -36,6 +52,7 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -111,12 +128,16 @@ export default defineType({
   preview: {
     select: {
       title: "title",
+      subtitle: "language",
       author: "author.name",
       media: "image",
     },
     prepare(selection) {
       const { author } = selection;
-      return { ...selection, subtitle: author && `by ${author}` };
+      return {
+        ...selection,
+        subtitle: selection.subtitle + (author && ` by ${author}`),
+      };
     },
   },
 });

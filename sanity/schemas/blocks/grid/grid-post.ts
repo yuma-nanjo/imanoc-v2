@@ -12,6 +12,12 @@ export default defineType({
       title: "Blog Post",
       description: "Select a blog post to link to.",
       to: [{ type: "post" }],
+      options: {
+        filter: ({ document }) => ({
+          filter: "language == $lang",
+          params: { lang: document.language },
+        }),
+      },
     }),
   ],
   preview: {

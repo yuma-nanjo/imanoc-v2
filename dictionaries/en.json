@@ -1,0 +1,20 @@
+{
+  "global": {
+    "english": "English",
+    "spanish": "Spanish",
+    "french": "French",
+    "form": {
+      "email": "Email",
+      "button": "Subscribe"
+    },
+    "missing": "Missing",
+    "document-with-slug": "document with slug",
+    "in-sanity-studio": "in Sanity Studio",
+    "built-by": "Built by"
+  },
+  "menu": {
+    "home": "Home",
+    "about": "About",
+    "blog": "Blog"
+  }
+}

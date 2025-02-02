@@ -1,6 +1,7 @@
 import { defineField, defineType } from "sanity";
 import { Files } from "lucide-react";
 import { orderRankField } from "@sanity/orderable-document-list";
+import { isUniqueOtherThanLanguage } from "@/lib/is-unique-lang";
 
 export default defineType({
   name: "page",
@@ -22,6 +23,21 @@ export default defineType({
     },
   ],
   fields: [
+    defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      group: "settings",
+      hidden: false,
+      initialValue: "en",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Spanish", value: "es" },
+          { title: "French", value: "fr" },
+        ],
+      },
+    }),
     defineField({ name: "title", type: "string", group: "content" }),
     defineField({
       name: "slug",
@@ -31,6 +47,7 @@ export default defineType({
       options: {
         source: "title",
         maxLength: 96,
+        isUnique: isUniqueOtherThanLanguage,
       },
       validation: (Rule) => Rule.required(),
     }),
@@ -81,4 +98,16 @@ export default defineType({
     }),
     orderRankField({ type: "page" }),
   ],
+  preview: {
+    select: {
+      title: "title",
+      subtitle: "language",
+    },
+    prepare({ title, subtitle }) {
+      return {
+        title,
+        subtitle,
+      };
+    },
+  },
 });

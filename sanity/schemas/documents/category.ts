@@ -14,6 +14,10 @@ export default defineType({
       type: "string",
       validation: (Rule) => Rule.required(),
     }),
+    defineField({
+      name: "internationalizedTitle",
+      type: "internationalizedArrayString",
+    }),
     orderRankField({ type: "category" }),
   ],
 });

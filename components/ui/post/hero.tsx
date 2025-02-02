@@ -2,6 +2,7 @@ import Image from "next/image";
 import PostDate from "./date";
 import { Mail } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
+import { Locale } from "@/i18n-config";
 
 export default function PostHero({
   title,
@@ -9,6 +10,7 @@ export default function PostHero({
   image,
   slug,
   _createdAt,
+  lang,
 }: Partial<{
   title: string;
   author: Sanity.Author;
@@ -16,6 +18,7 @@ export default function PostHero({
   image: Sanity.Image;
   slug: { current: string };
   _createdAt: string;
+  lang: Locale;
 }>) {
   return (
     <>
@@ -62,7 +65,7 @@ export default function PostHero({
           <div className="flex gap-2">
             <a
               className="hover:opacity-70"
-              href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug?.current}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blog/${slug?.current}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Share on Facebook"
@@ -83,7 +86,7 @@ export default function PostHero({
             </a>
             <a
               className="hover:opacity-70"
-              href={`mailto:?subject=$title}&body=${title}%0A%0A${process.env.NEXT_PUBLIC_SITE_URL}/blog/${slug?.current}`}
+              href={`mailto:?subject=${title}&body=${title}%0A%0A${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/blog/${slug?.current}`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Share via email"

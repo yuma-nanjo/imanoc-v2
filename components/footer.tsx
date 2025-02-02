@@ -1,28 +1,21 @@
 import Link from "next/link";
 import Logo from "@/components/logo";
+import { type getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n-config";
+import { getNavItems } from "@/lib/nav-items";
 
-const navItems = [
-  {
-    label: "Home",
-    href: "/",
-    target: false,
-  },
-  {
-    label: "Blog",
-    href: "/blog",
-    target: false,
-  },
-  {
-    label: "About",
-    href: "/about",
-    target: false,
-  },
-];
-
-export default function Footer() {
+export default function Footer({
+  lang,
+  dictionary,
+}: {
+  lang: Locale;
+  dictionary: Awaited<ReturnType<typeof getDictionary>>;
+}) {
   const getCurrentYear = () => {
     return new Date().getFullYear();
   };
+
+  const navItems = getNavItems(lang, dictionary);
 
   return (
     <footer>
@@ -49,7 +42,7 @@ export default function Footer() {
         </div>
         <div className="mt-8 flex flex-col lg:flex-row gap-6 justify-center text-center lg:mt-5 text-xs border-t pt-8">
           <p className="text-foreground/60">
-            &copy; {getCurrentYear()} Built by{" "}
+            &copy; {getCurrentYear()} {dictionary.global["built-by"]}{" "}
             <Link href="https://x.com/serge_0v" target="_blank" rel="noopener">
               @serge_0v
             </Link>

@@ -7,15 +7,36 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { NavItem } from "@/types";
 import Logo from "@/components/logo";
 import { useState } from "react";
 import { TextAlignRightIcon } from "@radix-ui/react-icons";
+import { type getDictionary } from "@/get-dictionary";
+import { Locale } from "@/i18n-config";
+import LocaleSwitcher from "./locale-switcher";
+import { ChevronRight } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { LANGUAGE_LABELS } from "./index";
 
-export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
+export default function MobileNav({
+  navItems,
+  dictionary,
+  lang,
+}: {
+  navItems: NavItem[];
+  dictionary: Awaited<ReturnType<typeof getDictionary>>;
+  lang: Locale;
+}) {
   const [open, setOpen] = useState(false);
+  const [langOpen, setLangOpen] = useState(false);
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
@@ -55,6 +76,31 @@ export default function MobileNav({ navItems }: { navItems: NavItem[] }) {
                   </li>
                 ))}
               </>
+              <li>
+                <Collapsible open={langOpen} onOpenChange={setLangOpen}>
+                  <CollapsibleTrigger className="p-0" asChild>
+                    <Button
+                      className="font-normal hover:opacity-50 hover:bg-transparent"
+                      variant="ghost"
+                    >
+                      <div className="text-lg">
+                        {LANGUAGE_LABELS[lang](dictionary)}
+                      </div>
+                      <ChevronRight
+                        className={cn(
+                          "h-6 w-6 transition-transform duration-300",
+                          langOpen ? "rotate-90" : ""
+                        )}
+                      />
+                    </Button>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="overflow-hidden data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up">
+                    <div className="py-2 px-4">
+                      <LocaleSwitcher className="h-10 hover:text-decoration-none hover:opacity-50 text-lg" />
+                    </div>
+                  </CollapsibleContent>
+                </Collapsible>
+              </li>
             </ul>
           </div>
         </div>

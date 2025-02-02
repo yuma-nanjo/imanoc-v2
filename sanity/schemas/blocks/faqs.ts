@@ -25,6 +25,12 @@ export default defineType({
           name: "faq",
           type: "reference",
           to: [{ type: "faq" }],
+          options: {
+            filter: ({ document }) => ({
+              filter: "language == $lang",
+              params: { lang: document.language },
+            }),
+          },
         },
       ],
     }),

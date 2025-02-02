@@ -11,6 +11,7 @@ import LogoCloud1 from "@/components/ui/logo-cloud/logo-cloud-1";
 import FAQs from "@/components/ui/faqs";
 import FormNewsletter from "@/components/ui/forms/newsletter";
 import AllPosts from "@/components/ui/all-posts";
+import { Locale } from "@/i18n-config";
 
 const componentMap: { [key: string]: React.ComponentType<any> } = {
   "hero-1": Hero1,
@@ -28,7 +29,13 @@ const componentMap: { [key: string]: React.ComponentType<any> } = {
   "all-posts": AllPosts,
 };
 
-export default function Blocks({ blocks }: { blocks?: Sanity.Block[] }) {
+export default function Blocks({
+  blocks,
+  lang,
+}: {
+  blocks?: Sanity.Block[];
+  lang: Locale;
+}) {
   return (
     <>
       {blocks?.map((block: Sanity.Block) => {
@@ -37,7 +44,7 @@ export default function Blocks({ blocks }: { blocks?: Sanity.Block[] }) {
           // Fallback for unknown block types to debug
           return <div data-type={block._type} key={block._key} />;
         }
-        return <Component {...block} key={block._key} />;
+        return <Component {...block} key={block._key} lang={lang} />;
       })}
     </>
   );

@@ -7,6 +7,20 @@ export default defineType({
   type: "document",
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: false,
+      initialValue: "en",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Spanish", value: "es" },
+          { title: "French", value: "fr" },
+        ],
+      },
+    }),
+    defineField({
       name: "name",
       type: "string",
     }),
@@ -33,7 +47,15 @@ export default defineType({
   preview: {
     select: {
       title: "name",
+      subtitle: "language",
       media: "image",
+    },
+    prepare({ title, subtitle, media }) {
+      return {
+        title,
+        subtitle,
+        media,
+      };
     },
   },
 });

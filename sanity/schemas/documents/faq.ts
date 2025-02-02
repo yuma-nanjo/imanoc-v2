@@ -9,6 +9,20 @@ export default defineType({
   icon: ListCollapse,
   fields: [
     defineField({
+      name: "language",
+      type: "string",
+      readOnly: true,
+      hidden: false,
+      initialValue: "en",
+      options: {
+        list: [
+          { title: "English", value: "en" },
+          { title: "Spanish", value: "es" },
+          { title: "French", value: "fr" },
+        ],
+      },
+    }),
+    defineField({
       name: "title",
       type: "string",
       validation: (Rule) => Rule.required(),
@@ -23,6 +37,13 @@ export default defineType({
   preview: {
     select: {
       title: "title",
+      subtitle: "language",
+    },
+    prepare({ title, subtitle }) {
+      return {
+        title,
+        subtitle,
+      };
     },
   },
 });

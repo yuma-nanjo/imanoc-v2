@@ -1,17 +1,13 @@
 import { MetadataRoute } from "next";
 import { groq } from "next-sanity";
 import { sanityFetch } from "@/sanity/lib/live";
+import { i18n } from "@/i18n-config";
 
 async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
   const query = groq`
     *[_type == 'page'] | order(slug.current) {
-      'url': $baseUrl + select(slug.current == 'index' => '', '/' + slug.current),
-      'lastModified': _updatedAt,
-      'changeFrequency': 'daily',
-      'priority': select(
-        slug.current == 'index' => 1,
-        0.5
-      )
+      slug,
+      _updatedAt
     }
   `;
 
@@ -22,16 +18,21 @@ async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
     },
   });
 
-  return data;
+  return data.flatMap((page: any) =>
+    i18n.locales.map((locale) => ({
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}${page.slug.current === "index" ? "" : "/" + page.slug.current}`,
+      lastModified: page._updatedAt,
+      changeFrequency: "daily" as const,
+      priority: page.slug.current === "index" ? 1 : 0.5,
+    }))
+  );
 }
 
 async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
   const query = groq`
     *[_type == 'post'] | order(_updatedAt desc) {
-      'url': $baseUrl + '/blog/' + slug.current,
-      'lastModified': _updatedAt,
-      'changeFrequency': 'weekly',
-      'priority': 0.7
+      slug,
+      _updatedAt
     }
   `;
 
@@ -42,7 +43,14 @@ async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
     },
   });
 
-  return data;
+  return data.flatMap((post: any) =>
+    i18n.locales.map((locale) => ({
+      url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${post.slug.current}`,
+      lastModified: post._updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    }))
+  );
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
@@ -53,3 +61,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap[]> {
 
   return [...pages, ...posts];
 }
+
+export const revalidate = 86400; // 24 hours

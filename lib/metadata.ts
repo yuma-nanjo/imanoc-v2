@@ -1,13 +1,16 @@
 import { urlFor } from "@/sanity/lib/image";
+import { Locale } from "@/i18n-config";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
 export function generatePageMetadata({
   page,
   slug,
+  lang,
 }: {
   page: Sanity.Page | Sanity.Post;
   slug: string;
+  lang: Locale;
 }) {
   return {
     title: page?.meta_title || page?.title,
@@ -31,7 +34,7 @@ export function generatePageMetadata({
         ? "noindex"
         : "index, follow",
     alternates: {
-      canonical: `/${slug === "index" ? "" : slug}`,
+      canonical: `/${lang}/${slug === "index" ? "" : slug}`,
     },
   };
 }

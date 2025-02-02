@@ -3,19 +3,27 @@ import { POST_QUERY } from "@/sanity/queries/post";
 import { POSTS_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/queries/posts";
 import { sanityFetch } from "@/sanity/lib/live";
 
-export const fetchSanityPosts = async (): Promise<Sanity.Post[]> => {
+export const fetchSanityPosts = async ({
+  language,
+}: {
+  language: string;
+}): Promise<Sanity.Post[]> => {
   const { data } = await sanityFetch({
     query: POSTS_QUERY,
+    params: { language },
   });
 
   return data;
 };
 
-export const fetchSanityPostsStaticParams = async (): Promise<
-  Sanity.Post[]
-> => {
+export const fetchSanityPostsStaticParams = async ({
+  language,
+}: {
+  language: string;
+}): Promise<Sanity.Post[]> => {
   const { data } = await sanityFetch({
     query: POSTS_SLUGS_QUERY,
+    params: { language },
     perspective: "published",
     stega: false,
   });
@@ -25,12 +33,14 @@ export const fetchSanityPostsStaticParams = async (): Promise<
 
 export const fetchSanityPostBySlug = async ({
   slug,
+  language,
 }: {
   slug: string;
+  language: string;
 }): Promise<Sanity.Post> => {
   const { data } = await sanityFetch({
     query: POST_QUERY,
-    params: { slug },
+    params: { slug, language },
   });
 
   return data;

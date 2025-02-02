@@ -1,6 +1,7 @@
 import { cn } from "@/lib/utils";
 import SectionContainer from "@/components/ui/section-container";
 import { stegaClean } from "next-sanity";
+import { Locale } from "@/i18n-config";
 // import only the components you need
 import GridCard from "./grid-card";
 import PricingCard from "./pricing-card";
@@ -21,6 +22,7 @@ interface Grid1Props {
     | "transparent";
   gridColumns: "grid-cols-2" | "grid-cols-3" | "grid-cols-4";
   columns: Sanity.Block[];
+  lang: Locale;
 }
 
 // map all components you need
@@ -35,6 +37,7 @@ export default function GridRow({
   colorVariant,
   gridColumns,
   columns,
+  lang,
 }: Partial<Grid1Props>) {
   const color = stegaClean(colorVariant);
 
@@ -53,7 +56,14 @@ export default function GridRow({
               // Fallback for unknown block types to debug
               return <div data-type={block._type} key={block._key} />;
             }
-            return <Component {...block} color={color} key={block._key} />;
+            return (
+              <Component
+                {...block}
+                color={color}
+                key={block._key}
+                lang={lang}
+              />
+            );
           })}
         </div>
       )}

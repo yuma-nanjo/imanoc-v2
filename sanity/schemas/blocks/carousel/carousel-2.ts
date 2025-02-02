@@ -26,6 +26,12 @@ export default defineType({
           name: "testimonial",
           type: "reference",
           to: [{ type: "testimonial" }],
+          options: {
+            filter: ({ document }) => ({
+              filter: "language == $lang",
+              params: { lang: document.language },
+            }),
+          },
         },
       ],
     }),

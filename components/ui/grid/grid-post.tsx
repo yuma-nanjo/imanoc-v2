@@ -4,6 +4,7 @@ import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { ChevronRight } from "lucide-react";
 import { Badge } from "../badge";
+import { Locale } from "@/i18n-config";
 
 interface GridPostProps {
   color:
@@ -19,6 +20,7 @@ interface GridPostProps {
   categories: Sanity.Category[];
   excerpt: string;
   image: Sanity.Image;
+  lang: Locale;
 }
 
 export default function GridPost({
@@ -28,12 +30,13 @@ export default function GridPost({
   excerpt,
   image,
   categories,
+  lang,
 }: GridPostProps) {
   return (
     <Link
       key={title}
       className="flex w-full rounded-3xl ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 group"
-      href={slug.current ? `/blog/${slug.current}` : "#"}
+      href={slug.current ? `/${lang}/blog/${slug.current}` : "#"}
     >
       <div
         className={cn(

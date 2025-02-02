@@ -11,30 +11,35 @@ export const resolve: PresentationPluginOptions["resolve"] = {
       select: {
         title: "title",
         slug: "slug.current",
+        language: "language",
       },
       resolve: (doc) => ({
         locations: [
           {
             title: doc?.title || "Untitled",
-            href: `/blog/${doc?.slug}`,
+            href: `/${doc?.language}/blog/${doc?.slug}`,
           },
-          { title: "Blog", href: `/blog` },
+          { title: "Blog", href: `/${doc?.language}/blog` },
         ],
       }),
     }),
   },
   mainDocuments: defineDocuments([
     {
-      route: "/",
-      filter: `_type == 'page' && slug.current == 'index'`,
+      route: "/en",
+      filter: `_type == 'page' && slug.current == 'index' && language == 'en'`,
     },
     {
-      route: "/:slug",
-      filter: `_type == 'page' && slug.current == $slug`,
+      route: "/es",
+      filter: `_type == 'page' && slug.current == 'index' && language == 'es'`,
     },
     {
-      route: "/blog/:slug",
-      filter: `_type == 'post' && slug.current == $slug`,
+      route: "/:lang/:slug",
+      filter: `_type == 'page' && slug.current == $slug && language == $lang`,
+    },
+    {
+      route: "/:lang/blog/:slug",
+      filter: `_type == 'post' && slug.current == $slug && language == $lang`,
     },
   ]),
 };
