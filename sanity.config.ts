@@ -20,6 +20,7 @@ import { assist } from "@sanity/assist";
 
 export default defineConfig({
   basePath: "/studio",
+  title: "Schema UI",
   projectId,
   dataset,
   // Add and edit the content schema in the './sanity/schema' folder
