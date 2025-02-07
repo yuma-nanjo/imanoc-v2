@@ -17,6 +17,7 @@ import { structure } from "./sanity/structure";
 import { documentInternationalization } from "@sanity/document-internationalization";
 import { internationalizedArray } from "sanity-plugin-internationalized-array";
 import { assist } from "@sanity/assist";
+import { codeInput } from "@sanity/code-input";
 
 export default defineConfig({
   basePath: "/studio",
@@ -82,5 +83,6 @@ export default defineConfig({
         },
       },
     }),
+    codeInput(),
   ],
 });
