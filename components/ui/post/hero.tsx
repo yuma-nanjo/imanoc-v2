@@ -3,6 +3,13 @@ import PostDate from "./date";
 import { Mail } from "lucide-react";
 import { urlFor } from "@/sanity/lib/image";
 import { Locale } from "@/i18n-config";
+import { POST_QUERYResult } from "@/sanity.types";
+
+type PostHero = NonNullable<POST_QUERYResult>;
+
+interface PostHeroProps extends PostHero {
+  lang?: Locale;
+}
 
 export default function PostHero({
   title,
@@ -11,15 +18,7 @@ export default function PostHero({
   slug,
   _createdAt,
   lang,
-}: Partial<{
-  title: string;
-  author: Sanity.Author;
-  excerpt: string;
-  image: Sanity.Image;
-  slug: { current: string };
-  _createdAt: string;
-  lang: Locale;
-}>) {
+}: PostHeroProps) {
   return (
     <>
       {title && <h1 className="mb-4 md:mb-6 text-3xl lg:text-5xl">{title}</h1>}

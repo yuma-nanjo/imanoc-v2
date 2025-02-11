@@ -3,30 +3,24 @@ import SectionContainer from "@/components/ui/section-container";
 import { stegaClean } from "next-sanity";
 import { Locale } from "@/i18n-config";
 // import only the components you need
+import { PAGE_QUERYResult } from "@/sanity.types";
 import GridCard from "./grid-card";
 import PricingCard from "./pricing-card";
 import GridPost from "./grid-post";
 
-interface Grid1Props {
-  padding: {
-    top: boolean;
-    bottom: boolean;
-  };
-  colorVariant:
-    | "primary"
-    | "secondary"
-    | "card"
-    | "accent"
-    | "destructive"
-    | "background"
-    | "transparent";
-  gridColumns: "grid-cols-2" | "grid-cols-3" | "grid-cols-4";
-  columns: Sanity.Block[];
-  lang: Locale;
+type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
+type GridRow = Extract<Block, { _type: "grid-row" }>;
+type GridColumn = NonNullable<NonNullable<GridRow["columns"]>[number]>;
+
+interface GridRowProps extends GridRow {
+  lang?: Locale;
 }
 
-// map all components you need
-const componentMap: { [key: string]: React.ComponentType<any> } = {
+const componentMap: {
+  [K in GridColumn["_type"]]: React.ComponentType<
+    Extract<GridColumn, { _type: K }>
+  >;
+} = {
   "grid-card": GridCard,
   "pricing-card": PricingCard,
   "grid-post": GridPost,
@@ -38,7 +32,7 @@ export default function GridRow({
   gridColumns,
   columns,
   lang,
-}: Partial<Grid1Props>) {
+}: GridRowProps) {
   const color = stegaClean(colorVariant);
 
   return (
@@ -50,17 +44,20 @@ export default function GridRow({
             `lg:${stegaClean(gridColumns)}`
           )}
         >
-          {columns.map((block: Sanity.Block) => {
-            const Component = componentMap[block._type];
+          {columns.map((column) => {
+            const Component = componentMap[column._type];
             if (!Component) {
-              // Fallback for unknown block types to debug
-              return <div data-type={block._type} key={block._key} />;
+              // Fallback for development/debugging of new component types
+              console.warn(
+                `No component implemented for grid column type: ${column._type}`
+              );
+              return <div data-type={column._type} key={column._key} />;
             }
             return (
               <Component
-                {...block}
+                {...(column as any)}
                 color={color}
-                key={block._key}
+                key={column._key}
                 lang={lang}
               />
             );

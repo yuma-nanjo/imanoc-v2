@@ -4,7 +4,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { i18n } from "@/i18n-config";
 
 async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
-  const query = groq`
+  const pagesQuery = groq`
     *[_type == 'page'] | order(slug.current) {
       slug,
       _updatedAt
@@ -12,7 +12,7 @@ async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
   `;
 
   const { data } = await sanityFetch({
-    query,
+    query: pagesQuery,
     params: {
       baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
     },
@@ -29,7 +29,7 @@ async function getPagesSitemap(): Promise<MetadataRoute.Sitemap[]> {
 }
 
 async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
-  const query = groq`
+  const postsQuery = groq`
     *[_type == 'post'] | order(_updatedAt desc) {
       slug,
       _updatedAt
@@ -37,7 +37,7 @@ async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
   `;
 
   const { data } = await sanityFetch({
-    query,
+    query: postsQuery,
     params: {
       baseUrl: process.env.NEXT_PUBLIC_SITE_URL,
     },

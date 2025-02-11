@@ -1,6 +1,7 @@
 "use server";
 import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "@/sanity/queries/page";
 import { sanityFetch } from "@/sanity/lib/live";
+import { PAGE_QUERYResult, PAGES_SLUGS_QUERYResult } from "@/sanity.types";
 
 export const fetchSanityPageBySlug = async ({
   slug,
@@ -8,7 +9,7 @@ export const fetchSanityPageBySlug = async ({
 }: {
   slug: string;
   language: string;
-}): Promise<Sanity.Page> => {
+}): Promise<PAGE_QUERYResult> => {
   const { data } = await sanityFetch({
     query: PAGE_QUERY,
     params: { slug, language },
@@ -21,7 +22,7 @@ export const fetchSanityPagesStaticParams = async ({
   language,
 }: {
   language: string;
-}): Promise<Sanity.Page[]> => {
+}): Promise<PAGES_SLUGS_QUERYResult> => {
   const { data } = await sanityFetch({
     query: PAGES_SLUGS_QUERY,
     params: { language },

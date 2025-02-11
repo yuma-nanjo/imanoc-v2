@@ -29,5 +29,5 @@ export default async function IndexPage({
     });
   }
 
-  return <Blocks blocks={page?.blocks} lang={lang} />;
+  return <Blocks blocks={page?.blocks || []} lang={lang} />;
 }

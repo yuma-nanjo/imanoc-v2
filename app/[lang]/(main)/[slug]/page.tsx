@@ -12,7 +12,7 @@ export async function generateStaticParams(props: {
 }) {
   const { lang } = await props.params;
   const pages = await fetchSanityPagesStaticParams({ language: lang });
-  return pages.map((page) => ({ slug: page.slug.current }));
+  return pages.map((page) => ({ slug: page.slug?.current }));
 }
 
 export async function generateMetadata(props: {
@@ -42,5 +42,5 @@ export default async function Page(props: {
     notFound();
   }
 
-  return <Blocks blocks={page?.blocks} lang={lang} />;
+  return <Blocks blocks={page?.blocks || []} lang={lang} />;
 }

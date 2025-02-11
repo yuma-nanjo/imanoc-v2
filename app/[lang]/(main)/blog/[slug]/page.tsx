@@ -17,7 +17,7 @@ export async function generateStaticParams(props: {
   const posts = await fetchSanityPostsStaticParams({ language: lang });
 
   return posts.map((post) => ({
-    slug: post.slug.current,
+    slug: post.slug?.current,
   }));
 }
 

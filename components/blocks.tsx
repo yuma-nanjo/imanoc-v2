@@ -1,3 +1,4 @@
+import { PAGE_QUERYResult } from "@/sanity.types";
 import Hero1 from "@/components/ui/hero/hero-1";
 import Hero2 from "@/components/ui/hero/hero-2";
 import SectionHeader from "@/components/ui/section-header";
@@ -13,7 +14,11 @@ import FormNewsletter from "@/components/ui/forms/newsletter";
 import AllPosts from "@/components/ui/all-posts";
 import { Locale } from "@/i18n-config";
 
-const componentMap: { [key: string]: React.ComponentType<any> } = {
+type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
+
+const componentMap: {
+  [K in Block["_type"]]: React.ComponentType<Extract<Block, { _type: K }>>;
+} = {
   "hero-1": Hero1,
   "hero-2": Hero2,
   "section-header": SectionHeader,
@@ -33,18 +38,21 @@ export default function Blocks({
   blocks,
   lang,
 }: {
-  blocks?: Sanity.Block[];
+  blocks?: Block[];
   lang: Locale;
 }) {
   return (
     <>
-      {blocks?.map((block: Sanity.Block) => {
+      {blocks?.map((block) => {
         const Component = componentMap[block._type];
         if (!Component) {
-          // Fallback for unknown block types to debug
+          // Fallback for development/debugging of new component types
+          console.warn(
+            `No component implemented for block type: ${block._type}`
+          );
           return <div data-type={block._type} key={block._key} />;
         }
-        return <Component {...block} key={block._key} lang={lang} />;
+        return <Component {...(block as any)} key={block._key} lang={lang} />;
       })}
     </>
   );
