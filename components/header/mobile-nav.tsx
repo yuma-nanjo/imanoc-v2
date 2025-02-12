@@ -17,13 +17,13 @@ import Link from "next/link";
 import { NavItem } from "@/types";
 import Logo from "@/components/logo";
 import { useState } from "react";
-import { TextAlignRightIcon } from "@radix-ui/react-icons";
 import { type getDictionary } from "@/get-dictionary";
 import { Locale } from "@/i18n-config";
 import LocaleSwitcher from "./locale-switcher";
 import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { LANGUAGE_LABELS } from "./index";
+import { AlignRight } from "lucide-react";
 
 export default function MobileNav({
   navItems,
@@ -43,14 +43,14 @@ export default function MobileNav({
         <Button
           aria-label="Open Menu"
           variant="ghost"
-          className="w-[1.75rem] p-5 focus-visible:ring-1 focus-visible:ring-offset-1"
+          className="w-10 p-5 focus-visible:ring-1 focus-visible:ring-offset-1"
         >
-          <TextAlignRightIcon className="dark:text-white" />
+          <AlignRight className="dark:text-white" />
         </Button>
       </SheetTrigger>
       <SheetContent>
         <SheetHeader>
-          <div className="mr-6 ml-auto">
+          <div className="mx-auto">
             <Logo />
           </div>
           <div className="sr-only">
@@ -60,7 +60,7 @@ export default function MobileNav({
         </SheetHeader>
         <div className="pt-10 pb-20">
           <div className="container">
-            <ul className="list-none text-right space-y-3">
+            <ul className="list-none text-center space-y-3">
               <>
                 {navItems.map((navItem) => (
                   <li key={navItem.label}>
