@@ -2,8 +2,8 @@ import SectionContainer from "@/components/ui/section-container";
 import PostCard from "@/components/ui/post-card";
 import Link from "next/link";
 import { stegaClean } from "next-sanity";
-import { fetchSanityPosts } from "@/app/[lang]/(main)/blog/actions";
 import { Locale } from "@/i18n-config";
+import { fetchSanityPosts } from "@/sanity/lib/fetch";
 import { PAGE_QUERYResult } from "@/sanity.types";
 
 type AllPosts = Extract<

@@ -1,12 +1,47 @@
-"use server";
-import { POST_QUERY } from "@/sanity/queries/post";
-import { POSTS_QUERY, POSTS_SLUGS_QUERY } from "@/sanity/queries/posts";
 import { sanityFetch } from "@/sanity/lib/live";
+import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "@/sanity/queries/page";
 import {
+  POST_QUERY,
+  POSTS_QUERY,
+  POSTS_SLUGS_QUERY,
+} from "@/sanity/queries/post";
+import {
+  PAGE_QUERYResult,
+  PAGES_SLUGS_QUERYResult,
   POST_QUERYResult,
-  POSTS_SLUGS_QUERYResult,
   POSTS_QUERYResult,
+  POSTS_SLUGS_QUERYResult,
 } from "@/sanity.types";
+
+export const fetchSanityPageBySlug = async ({
+  slug,
+  language,
+}: {
+  slug: string;
+  language: string;
+}): Promise<PAGE_QUERYResult> => {
+  const { data } = await sanityFetch({
+    query: PAGE_QUERY,
+    params: { slug, language },
+  });
+
+  return data;
+};
+
+export const fetchSanityPagesStaticParams = async ({
+  language,
+}: {
+  language: string;
+}): Promise<PAGES_SLUGS_QUERYResult> => {
+  const { data } = await sanityFetch({
+    query: PAGES_SLUGS_QUERY,
+    params: { language },
+    perspective: "published",
+    stega: false,
+  });
+
+  return data;
+};
 
 export const fetchSanityPosts = async ({
   language,

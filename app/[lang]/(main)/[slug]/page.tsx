@@ -2,9 +2,9 @@ import Blocks from "@/components/blocks";
 import {
   fetchSanityPageBySlug,
   fetchSanityPagesStaticParams,
-} from "../actions";
+} from "@/sanity/lib/fetch";
 import { notFound } from "next/navigation";
-import { generatePageMetadata } from "@/lib/metadata";
+import { generatePageMetadata } from "@/sanity/lib/metadata";
 import { Locale } from "@/i18n-config";
 
 export async function generateStaticParams(props: {
