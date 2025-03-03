@@ -1,0 +1,23 @@
+{
+	"global": {
+		"ja": "日語",
+		"en": "英語",
+		"zh": "中文（簡體）",
+		"zht": "中文（繁體）",
+		"form": {
+			"email": "電子郵件",
+			"button": "訂閱"
+		},
+		"missing": "缺失",
+		"document-with-slug": "帶有slug的文件",
+		"in-sanity-studio": "在 Sanity Studio 中",
+		"built-by": "製作："
+	},
+	"menu": {
+		"home": "首頁",
+		"about": "關於",
+		"service": "服務",
+		"column": "專欄",
+		"news": "新聞"
+	}
+}

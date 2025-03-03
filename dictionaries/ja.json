@@ -1,0 +1,23 @@
+{
+	"global": {
+		"ja": "日本語",
+		"en": "英語",
+		"zh": "中国語（簡体）",
+		"zht": "中国語（繁体）",
+		"form": {
+			"email": "メールアドレス",
+			"button": "購読する"
+		},
+		"missing": "見つかりません",
+		"document-with-slug": "スラッグ付きドキュメント",
+		"in-sanity-studio": "Sanity Studio内",
+		"built-by": "制作元"
+	},
+	"menu": {
+		"home": "TOP",
+		"about": "imanocについて",
+		"service": "事業内容",
+		"column": "コラム",
+		"news": "お知らせ"
+	}
+}

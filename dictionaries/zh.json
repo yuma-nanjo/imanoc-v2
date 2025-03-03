@@ -1,0 +1,23 @@
+{
+	"global": {
+		"ja": "日语",
+		"en": "英语",
+		"zh": "中文（简体）",
+		"zht": "中文（繁体）",
+		"form": {
+			"email": "电子邮件",
+			"button": "订阅"
+		},
+		"missing": "缺失",
+		"document-with-slug": "带有slug的文档",
+		"in-sanity-studio": "在 Sanity Studio 中",
+		"built-by": "制作："
+	},
+	"menu": {
+		"home": "首页",
+		"about": "关于",
+		"service": "服务",
+		"column": "专栏",
+		"news": "新闻"
+	}
+}
