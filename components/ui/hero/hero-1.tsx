@@ -5,6 +5,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { stegaClean } from "next-sanity";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import type { PAGE_QUERYResult } from "@/sanity.types";
+import Shapes from "@/components/threejs/Shapes";
 
 type Hero1Props = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -19,8 +20,8 @@ export default function Hero1({
 	links,
 }: Hero1Props) {
 	return (
-		<div className="container dark:bg-background py-20 lg:pt-40">
-			<div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+		<div className="container dark:bg-background py-10 lg:pt-20">
+			<div className="grid grid-cols-1 lg:grid-cols-[6fr_4fr] gap-4">
 				<div className="flex flex-col justify-center">
 					{tagLine && (
 						<h1 className="leading-[0] font-sans animate-fade-up [animation-delay:100ms] opacity-0">
@@ -28,12 +29,12 @@ export default function Hero1({
 						</h1>
 					)}
 					{title && (
-						<h2 className="mt-6 font-bold leading-[1.1] text-4xl md:text-5xl lg:text-6xl animate-fade-up [animation-delay:200ms] opacity-0">
+						<h2 className="mt-6 font-bold leading-[1.1] text-xl sm:text-2xl md:text-3xl lg:text-4xl animate-fade-up [animation-delay:200ms] opacity-0">
 							{title}
 						</h2>
 					)}
 					{body && (
-						<div className="text-lg mt-6 animate-fade-up [animation-delay:300ms] opacity-0">
+						<div className="text-xs sm:text-sm md:text-base mt-6 animate-fade-up [animation-delay:300ms] opacity-0 text-muted-foreground">
 							<PortableTextRenderer value={body} />
 						</div>
 					)}
@@ -58,7 +59,7 @@ export default function Hero1({
 					)}
 				</div>
 				<div className="flex flex-col justify-center">
-					{image?.asset?._id && (
+					{image?.asset?._id ? (
 						<Image
 							className="rounded-xl animate-fade-up [animation-delay:500ms] opacity-0"
 							src={urlFor(image).url()}
@@ -69,6 +70,11 @@ export default function Hero1({
 							blurDataURL={image?.asset?.metadata?.lqip || ""}
 							quality={100}
 						/>
+					) : (
+						<div className="min-h-80 lg:aspect-square">
+							{/* <Shapes /> */}
+							Shapes
+						</div>
 					)}
 				</div>
 			</div>
