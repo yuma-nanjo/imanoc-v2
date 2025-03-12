@@ -1,16 +1,22 @@
+import type { Locale } from "@/i18n-config";
 import type { SERVICE_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { Mail } from "lucide-react";
 import Image from "next/image";
 import ServiceDate from "./date";
 
-type ServiceHeroProps = NonNullable<SERVICE_QUERYResult>;
+type ServiceHero = NonNullable<SERVICE_QUERYResult>;
+
+interface ServiceHeroProps extends ServiceHero {
+	lang?: Locale;
+}
 
 export default function ServiceHero({
 	title,
 	image,
 	slug,
 	_createdAt,
+	lang,
 }: ServiceHeroProps) {
 	return (
 		<>
@@ -33,11 +39,11 @@ export default function ServiceHero({
 					<ServiceDate date={_createdAt as string} />
 				</div>
 				<div className="flex flex-col md:flex-row gap-2">
-					<div>この記事をシェアする</div>
+					<div>Share this service</div>
 					<div className="flex gap-2">
 						<a
 							className="hover:opacity-70"
-							href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/news/${slug?.current}`}
+							href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/column/${slug?.current}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Share on Facebook"
@@ -50,7 +56,7 @@ export default function ServiceHero({
 								fill="none"
 								xmlns="http://www.w3.org/2000/svg"
 							>
-								<title>Face book</title>
+								<title>Logo</title>
 								<path
 									d="M22 12.3038C22 6.74719 17.5229 2.24268 12 2.24268C6.47715 2.24268 2 6.74719 2 12.3038C2 17.3255 5.65684 21.4879 10.4375 22.2427V15.2121H7.89844V12.3038H10.4375V10.0872C10.4375 7.56564 11.9305 6.1728 14.2146 6.1728C15.3088 6.1728 16.4531 6.36931 16.4531 6.36931V8.84529H15.1922C13.95 8.84529 13.5625 9.6209 13.5625 10.4166V12.3038H16.3359L15.8926 15.2121H13.5625V22.2427C18.3432 21.4879 22 17.3257 22 12.3038Z"
 									className="fill-black dark:fill-white"
@@ -59,7 +65,7 @@ export default function ServiceHero({
 						</a>
 						<a
 							className="hover:opacity-70"
-							href={`mailto:?subject=${title}&body=${title}%0A%0A${process.env.NEXT_PUBLIC_SITE_URL}/news/${slug?.current}`}
+							href={`mailto:?subject=${title}&body=${title}%0A%0A${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/column/${slug?.current}`}
 							target="_blank"
 							rel="noopener noreferrer"
 							aria-label="Share via email"

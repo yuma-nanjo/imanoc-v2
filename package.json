@@ -49,7 +49,7 @@
 		"react-hook-form": "^7.54.2",
 		"react-player": "^2.16.0",
 		"resend": "^4.1.2",
-		"sanity": "^3.75.0",
+		"sanity": "^3.79.0",
 		"sanity-plugin-internationalized-array": "^3.1.1",
 		"sonner": "^1.7.2",
 		"tailwind-merge": "^3.0.1",
