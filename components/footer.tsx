@@ -21,11 +21,11 @@ export default function Footer({
 		<footer>
 			<div className="dark:bg-background pb-5 xl:pb-5 dark:text-gray-300">
 				<Link
-					className="block w-[6.25rem] mx-auto"
+					className="flex items-center justify-center"
 					href="/"
 					aria-label="Home page"
 				>
-					imanoc
+					<Logo />
 				</Link>
 				<div className="mt-8 flex flex-wrap items-center justify-center gap-7 text-primary">
 					{navItems.map((navItem) => (
@@ -42,11 +42,7 @@ export default function Footer({
 				</div>
 				<div className="mt-8 flex flex-col lg:flex-row gap-6 justify-center text-center lg:mt-5 text-xs border-t pt-8">
 					<p className="text-foreground/60">
-						&copy; {getCurrentYear()} {dictionary.global["built-by"]}{" "}
-						<Link href="https://x.com/serge_0v" target="_blank" rel="noopener">
-							@serge_0v
-						</Link>
-						.
+						&copy; {getCurrentYear()} imanoc,Inc.
 					</p>
 				</div>
 			</div>

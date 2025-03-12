@@ -26,17 +26,19 @@ export default function SplitRow({
 	padding,
 	colorVariant,
 	noGap,
+	reverse,
 	splitColumns,
 }: SplitRow) {
 	const color = stegaClean(colorVariant);
 
 	return (
-		<SectionContainer color={color} padding={padding}>
+		<SectionContainer color={color} padding={padding} className="sprit-row">
 			{splitColumns && splitColumns?.length > 0 && (
 				<div
 					className={cn(
-						"grid grid-cols-1 lg:grid-cols-2",
-						noGap ? "gap-0" : "gap-12 lg:gap-20",
+						"flex lg:grid lg:grid-cols-2",
+						reverse ? "flex-col-reverse" : "flex-col",
+						noGap ? "gap-0" : "gap-4 sm:gap-6 md:gap-12 lg:gap-20",
 					)}
 				>
 					{splitColumns?.map((column) => {

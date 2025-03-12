@@ -55,7 +55,9 @@ export default function GridPost({ color, post, lang }: GridPostProps) {
 					)}
 					{title && (
 						<div className="flex justify-between items-center mb-4">
-							<h3 className="font-bold text-[1.5rem] leading-[1.2]">{title}</h3>
+							<h3 className="font-bold text-[1.5rem] leading-[1.2] line-clamp-2">
+								{title}
+							</h3>
 						</div>
 					)}
 					{categories && categories.length > 0 && (
@@ -67,7 +69,7 @@ export default function GridPost({ color, post, lang }: GridPostProps) {
 							))}
 						</div>
 					)}
-					{excerpt && <p>{excerpt}</p>}
+					{excerpt && <p className="line-clamp-3">{excerpt}</p>}
 				</div>
 				<div className="mt-3 xl:mt-6 w-10 h-10 border rounded-full flex items-center justify-center group-hover:border-primary">
 					<ChevronRight

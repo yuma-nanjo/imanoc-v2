@@ -13,6 +13,7 @@ import FAQs from "@/components/ui/faqs";
 import FormNewsletter from "@/components/ui/forms/newsletter";
 import AllPosts from "@/components/ui/all-posts";
 import type { Locale } from "@/i18n-config";
+import ContactForm from "./ui/forms/contactform";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
@@ -31,6 +32,7 @@ const componentMap: {
 	"logo-cloud-1": LogoCloud1,
 	faqs: FAQs,
 	"form-newsletter": FormNewsletter,
+	"form-contact": ContactForm,
 	"all-posts": AllPosts,
 };
 

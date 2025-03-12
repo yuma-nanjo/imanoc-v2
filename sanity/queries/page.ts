@@ -12,6 +12,7 @@ import { logoCloud1Query } from "./logo-cloud/logo-cloud-1";
 import { faqsQuery } from "./faqs";
 import { formNewsletterQuery } from "./forms/newsletter";
 import { allPostsQuery } from "./all-posts";
+import { formContactQuery } from "./forms/contactform";
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug && language == $language][0]{
@@ -28,6 +29,7 @@ export const PAGE_QUERY = groq`
       ${logoCloud1Query},
       ${faqsQuery},
       ${formNewsletterQuery},
+      ${formContactQuery},
       ${allPostsQuery},
     },
     meta_title,

@@ -42,22 +42,32 @@ export default function SplitContent({
 					noGap ? "px-10" : undefined,
 				)}
 			>
-				{tagLine && <TagLine title={tagLine} element="h2" />}
+				{tagLine && (
+					<TagLine
+						className="font-mono text-sm text-foreground/60"
+						title={tagLine}
+						element="h2"
+					/>
+				)}
 				{title &&
 					createElement(
 						tagLine ? "h3" : "h2",
 						{
-							className: cn("my-4 font-semibold leading-[1.2]"),
+							className: cn("my-2 sm:my-4 font-semibold leading-[1.2]"),
 						},
 						title,
 					)}
-				{body && <PortableTextRenderer value={body} />}
+				{body && (
+					<div className="text-sm">
+						<PortableTextRenderer value={body} />
+					</div>
+				)}
 				{link?.href && (
-					<div className="flex flex-col">
+					<div className="flex flex-col ml-auto">
 						<Button
-							className="mt-2"
+							className="mt-4"
 							variant={stegaClean(link?.buttonVariant)}
-							size="lg"
+							size="sm"
 							asChild
 						>
 							<Link

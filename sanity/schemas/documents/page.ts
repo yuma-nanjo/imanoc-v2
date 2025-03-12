@@ -69,6 +69,7 @@ export default defineType({
 				{ type: "logo-cloud-1" },
 				{ type: "faqs" },
 				{ type: "form-newsletter" },
+				{ type: "form-contact" },
 				{ type: "all-posts" },
 			],
 		}),
