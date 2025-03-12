@@ -1,4 +1,5 @@
 import AllPosts from "@/components/ui/all-posts";
+import SomePosts from "@/components/ui/some-posts";
 import Carousel1 from "@/components/ui/carousel/carousel-1";
 import Carousel2 from "@/components/ui/carousel/carousel-2";
 import Cta1 from "@/components/ui/cta/cta-1";
@@ -36,6 +37,7 @@ const componentMap: {
 	"form-newsletter": FormNewsletter,
 	"form-contact": ContactForm,
 	"all-posts": AllPosts,
+	"some-posts": SomePosts,
 	"all-services": AllServices,
 	"all-companies": AllCompanies,
 };
