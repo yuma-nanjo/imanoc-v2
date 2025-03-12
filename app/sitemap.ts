@@ -47,7 +47,7 @@ async function getPostsSitemap(): Promise<MetadataRoute.Sitemap[]> {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	return data.flatMap((post: any) =>
 		i18n.locales.map((locale) => ({
-			url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/blog/${post.slug.current}`,
+			url: `${process.env.NEXT_PUBLIC_SITE_URL}/${locale}/column/${post.slug.current}`,
 			lastModified: post._updatedAt,
 			changeFrequency: "weekly" as const,
 			priority: 0.7,

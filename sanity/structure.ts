@@ -21,6 +21,22 @@ export const structure = (S: any, context: any) =>
 						.title("Post")
 						.defaultOrdering([{ field: "_createdAt", direction: "desc" }]), // Default ordering
 				),
+			S.listItem()
+				.title("Services")
+				.schemaType("service")
+				.child(
+					S.documentTypeList("service")
+						.title("Service")
+						.defaultOrdering([{ field: "_createdAt", direction: "desc" }]), // Default ordering
+				),
+			S.listItem()
+				.title("Companies")
+				.schemaType("company")
+				.child(
+					S.documentTypeList("company")
+						.title("Company")
+						.defaultOrdering([{ field: "_createdAt", direction: "desc" }]), // Default ordering
+				),
 			orderableDocumentListDeskItem({
 				type: "category",
 				title: "Categories",

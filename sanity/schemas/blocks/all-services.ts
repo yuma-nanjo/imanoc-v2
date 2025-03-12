@@ -2,10 +2,10 @@ import { defineField, defineType } from "sanity";
 import { Newspaper } from "lucide-react";
 
 export default defineType({
-	name: "all-posts",
+	name: "all-services",
 	type: "object",
-	title: "All Posts",
-	description: "A list of all posts",
+	title: "All Services",
+	description: "A list of all services",
 	icon: Newspaper,
 	fields: [
 		defineField({
@@ -22,7 +22,7 @@ export default defineType({
 	preview: {
 		prepare() {
 			return {
-				title: "All Posts",
+				title: "All Services",
 			};
 		},
 	},

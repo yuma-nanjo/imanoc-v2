@@ -26,7 +26,7 @@ export default function GridPost({ color, post, lang }: GridPostProps) {
 		<Link
 			key={title}
 			className="flex w-full rounded-3xl ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 group"
-			href={slug?.current ? `/${lang}/blog/${slug.current}` : "#"}
+			href={slug?.current ? `/${lang}/column/${slug.current}` : "#"}
 		>
 			<div
 				className={cn(

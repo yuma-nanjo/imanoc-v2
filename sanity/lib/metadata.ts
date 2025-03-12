@@ -1,6 +1,11 @@
 import { urlFor } from "@/sanity/lib/image";
 import type { Locale } from "@/i18n-config";
-import type { PAGE_QUERYResult, POST_QUERYResult } from "@/sanity.types";
+import type {
+	COMPANY_QUERYResult,
+	PAGE_QUERYResult,
+	POST_QUERYResult,
+	SERVICE_QUERYResult,
+} from "@/sanity.types";
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
 export function generatePageMetadata({
@@ -8,7 +13,11 @@ export function generatePageMetadata({
 	slug,
 	lang,
 }: {
-	page: PAGE_QUERYResult | POST_QUERYResult;
+	page:
+		| PAGE_QUERYResult
+		| POST_QUERYResult
+		| SERVICE_QUERYResult
+		| COMPANY_QUERYResult;
 	slug: string;
 	lang: Locale;
 }) {

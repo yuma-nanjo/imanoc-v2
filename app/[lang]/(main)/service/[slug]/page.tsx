@@ -1,11 +1,11 @@
 import { notFound } from "next/navigation";
 import Breadcrumbs from "@/components/ui/breadcrumbs";
-import PostHero from "@/components/ui/post/hero";
+import ServiceHero from "@/components/ui/service/hero";
 import type { BreadcrumbLink } from "@/types";
 import PortableTextRenderer from "@/components/portable-text-renderer";
 import {
-	fetchSanityPostBySlug,
-	fetchSanityPostsStaticParams,
+	fetchSanityServiceBySlug,
+	fetchSanityServicesStaticParams,
 } from "@/sanity/lib/fetch";
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { Locale } from "@/i18n-config";
@@ -14,10 +14,10 @@ export async function generateStaticParams(props: {
 	params: Promise<{ lang: Locale }>;
 }) {
 	const { lang } = await props.params;
-	const posts = await fetchSanityPostsStaticParams({ language: lang });
+	const services = await fetchSanityServicesStaticParams({ language: lang });
 
-	return posts.map((post) => ({
-		slug: post.slug?.current,
+	return services.map((service) => ({
+		slug: service.slug?.current,
 	}));
 }
 
@@ -25,26 +25,26 @@ export async function generateMetadata(props: {
 	params: Promise<{ slug: string; lang: Locale }>;
 }) {
 	const { slug, lang } = await props.params;
-	const post = await fetchSanityPostBySlug({ slug, language: lang });
+	const service = await fetchSanityServiceBySlug({ slug, language: lang });
 
-	if (!post) {
+	if (!service) {
 		notFound();
 	}
 
-	return generatePageMetadata({ page: post, slug: `/blog/${slug}`, lang });
+	return generatePageMetadata({ page: service, slug: `/column/${slug}`, lang });
 }
 
-export default async function PostPage(props: {
+export default async function ServicePage(props: {
 	params: Promise<{ slug: string; lang: Locale }>;
 }) {
 	const { slug, lang } = await props.params;
-	const post = await fetchSanityPostBySlug({ slug, language: lang });
+	const service = await fetchSanityServiceBySlug({ slug, language: lang });
 	const dictionary = await getDictionary(lang);
-	if (!post) {
+	if (!service) {
 		notFound();
 	}
 
-	const links: BreadcrumbLink[] = post
+	const links: BreadcrumbLink[] = service
 		? [
 				{
 					label: dictionary.menu.home,
@@ -52,10 +52,10 @@ export default async function PostPage(props: {
 				},
 				{
 					label: dictionary.menu.column,
-					href: `/${lang}/column`,
+					href: `/${lang}/service`,
 				},
 				{
-					label: post.title as string,
+					label: service.title as string,
 					href: "#",
 				},
 			]
@@ -66,8 +66,8 @@ export default async function PostPage(props: {
 			<div className="container py-16 xl:py-20">
 				<article className="max-w-3xl mx-auto">
 					<Breadcrumbs links={links} />
-					<PostHero {...post} lang={lang} />
-					{post.body && <PortableTextRenderer value={post.body} />}
+					<ServiceHero {...service} lang={lang} />
+					{service.body && <PortableTextRenderer value={service.body} />}
 				</article>
 			</div>
 		</section>
