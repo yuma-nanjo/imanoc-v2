@@ -10,6 +10,9 @@ import {
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
+import { Toc } from "@/components/ui/post/toc";
+import { DesktopToc } from "@/components/ui/post/desktop-toc";
+import { MobileToc } from "@/components/ui/post/mobile-toc";
 export async function generateStaticParams(props: {
 	params: Promise<{ lang: Locale }>;
 }) {
@@ -63,13 +66,19 @@ export default async function PostPage(props: {
 
 	return (
 		<section>
-			<div className="container py-16 xl:py-20">
-				<article className="max-w-3xl mx-auto">
+			<div className="container mx-auto py-16 xl:py-20">
+				<article className="max-w-none prose dark:prose-invert">
 					<Breadcrumbs links={links} />
 					<PostHero {...post} lang={lang} />
-					{post.body && <PortableTextRenderer value={post.body} />}
+					<div className="flex flex-col lg:flex-row-reverse gap-4">
+						<DesktopToc headings={post.headings} />
+						<div className="w-full lg:w-3/4">
+							{post.body && <PortableTextRenderer value={post.body} />}
+						</div>
+					</div>
 				</article>
 			</div>
+			<MobileToc headings={post.headings} />
 		</section>
 	);
 }

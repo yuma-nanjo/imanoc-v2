@@ -3,21 +3,21 @@ import { orderRankField } from "@sanity/orderable-document-list";
 import { BookA } from "lucide-react";
 
 export default defineType({
-  name: "category",
-  title: "Category",
-  type: "document",
-  icon: BookA,
-  fields: [
-    defineField({
-      name: "title",
-      title: "Title",
-      type: "string",
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: "internationalizedTitle",
-      type: "internationalizedArrayString",
-    }),
-    orderRankField({ type: "category" }),
-  ],
+	name: "category",
+	title: "Category",
+	type: "document",
+	icon: BookA,
+	fields: [
+		defineField({
+			name: "title",
+			title: "Title",
+			type: "string",
+			validation: (Rule) => Rule.required(),
+		}),
+		defineField({
+			name: "internationalizedTitle",
+			type: "internationalizedArrayString",
+		}),
+		orderRankField({ type: "category" }),
+	],
 });
