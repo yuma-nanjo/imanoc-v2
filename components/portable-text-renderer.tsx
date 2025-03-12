@@ -1,7 +1,7 @@
 import { CopyButton } from "@/components/ui/copy-button";
 import { YouTubeEmbed } from "@next/third-parties/google";
 import type { PortableTextProps } from "@portabletext/react";
-import { PortableText } from "@portabletext/react";
+import { PortableText, toPlainText } from "@portabletext/react";
 import Image from "next/image";
 import Link from "next/link";
 import { Highlight, themes } from "prism-react-renderer";
@@ -80,21 +80,66 @@ const portableTextComponents: PortableTextProps["components"] = {
 		normal: ({ children }) => (
 			<p style={{ marginBottom: "1rem" }}>{children}</p>
 		),
-		h1: ({ children }) => (
-			<h1 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h1>
-		),
-		h2: ({ children }) => (
-			<h2 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h2>
-		),
-		h3: ({ children }) => (
-			<h3 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h3>
-		),
-		h4: ({ children }) => (
-			<h4 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h4>
-		),
-		h5: ({ children }) => (
-			<h5 style={{ marginBottom: "1rem", marginTop: "1rem" }}>{children}</h5>
-		),
+		h1: ({ children, value }) => {
+			const slug = toPlainText(value);
+			return (
+				<h1
+					id={slug}
+					className="scroll-mt-20"
+					style={{ marginBottom: "1rem", marginTop: "1rem" }}
+				>
+					{children}
+				</h1>
+			);
+		},
+		h2: ({ children, value }) => {
+			const slug = toPlainText(value);
+			return (
+				<h2
+					id={slug}
+					className="scroll-mt-20"
+					style={{ marginBottom: "1rem", marginTop: "1rem" }}
+				>
+					{children}
+				</h2>
+			);
+		},
+		h3: ({ children, value }) => {
+			const slug = toPlainText(value);
+			return (
+				<h3
+					id={slug}
+					className="scroll-mt-20"
+					style={{ marginBottom: "1rem", marginTop: "1rem" }}
+				>
+					{children}
+				</h3>
+			);
+		},
+		h4: ({ children, value }) => {
+			const slug = toPlainText(value);
+			return (
+				<h4
+					id={slug}
+					className="scroll-mt-20"
+					style={{ marginBottom: "1rem", marginTop: "1rem" }}
+				>
+					{children}
+				</h4>
+			);
+		},
+		h5: ({ children, value }) => {
+			const slug = toPlainText(value);
+			return (
+				<h5
+					id={slug}
+					className="scroll-mt-20"
+					style={{ marginBottom: "1rem", marginTop: "1rem" }}
+				>
+					{children}
+				</h5>
+			);
+		},
 	},
 	marks: {
 		link: ({ value, children }) => {

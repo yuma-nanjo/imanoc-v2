@@ -72,7 +72,8 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && lan
           }
         }
       },
-    }
+    },
+    "headings": body[style in ["h1", "h2", "h3", "h4", "h5", "h6"]]
 }`;
 
 export const POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language] | order(_createdAt desc){
