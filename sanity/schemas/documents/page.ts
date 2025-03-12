@@ -71,6 +71,7 @@ export default defineType({
 				{ type: "form-newsletter" },
 				{ type: "form-contact" },
 				{ type: "all-posts" },
+				{ type: "some-posts" },
 				{ type: "all-services" },
 				{ type: "all-companies" },
 			],

@@ -9,6 +9,7 @@ import testimonial from "./schemas/documents/testimonial";
 
 import allCompanies from "./schemas/blocks/all-companies";
 import allPosts from "./schemas/blocks/all-posts";
+
 import allServices from "./schemas/blocks/all-services";
 import carousel1 from "./schemas/blocks/carousel/carousel-1";
 import carousel2 from "./schemas/blocks/carousel/carousel-2";
@@ -43,6 +44,7 @@ import timelinesOne from "./schemas/blocks/timeline/timelines-1";
 import company from "./schemas/documents/company";
 import contact from "./schemas/documents/contact";
 import service from "./schemas/documents/service";
+import somePosts from "./schemas/blocks/some-posts";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -87,6 +89,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		newsletter,
 		contactform,
 		allPosts,
+		somePosts,
 		allServices,
 		allCompanies,
 	],

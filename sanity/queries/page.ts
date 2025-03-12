@@ -15,6 +15,7 @@ import { logoCloud1Query } from "./logo-cloud/logo-cloud-1";
 import { sectionHeaderQuery } from "./section-header";
 import { splitRowQuery } from "./split/split-row";
 import { timelineQuery } from "./timeline";
+import { somePostsQuery } from "./some-posts";
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug && language == $language][0]{
@@ -33,6 +34,7 @@ export const PAGE_QUERY = groq`
       ${formNewsletterQuery},
       ${formContactQuery},
       ${allPostsQuery},
+      ${somePostsQuery},
       ${allServicesQuery},
       ${allCompaniesQuery},
     },
