@@ -30,8 +30,13 @@ export default function Header({
 	return (
 		<header className="sticky top-0 w-full border-border/40 bg-background/95 z-50">
 			<div className="container flex items-center justify-between h-14">
-				<Link href="/" aria-label="Home page">
-					imanoc
+				<Link
+					href="/"
+					aria-label="Home page"
+					className="flex gap-2 justify-center items-center"
+				>
+					<Logo />
+					<h1 className="text-base font-mono">imanoc</h1>
 				</Link>
 				<div className="hidden xl:flex gap-7 items-center justify-between">
 					<DesktopNav navItems={navItems} dictionary={dictionary} lang={lang} />

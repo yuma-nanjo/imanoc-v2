@@ -1,11 +1,21 @@
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import Image from "next/image";
-import { urlFor } from "@/sanity/lib/image";
-import { stegaClean } from "next-sanity";
+"use client";
+
+import Logo from "@/components/logo";
 import PortableTextRenderer from "@/components/portable-text-renderer";
+import { Button } from "@/components/ui/button";
 import type { PAGE_QUERYResult } from "@/sanity.types";
-import Shapes from "@/components/threejs/Shapes";
+import { stegaClean } from "next-sanity";
+import dynamic from "next/dynamic";
+import Link from "next/link";
+
+const Shapes = dynamic(() => import("../../threejs/Shapes"), {
+	ssr: false,
+	loading: () => (
+		<div className="animate-pulse flex h-full justify-center items-center">
+			<Logo />
+		</div>
+	),
+});
 
 type Hero1Props = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -21,11 +31,13 @@ export default function Hero1({
 }: Hero1Props) {
 	return (
 		<div className="container dark:bg-background py-10 lg:pt-20">
-			<div className="grid grid-cols-1 lg:grid-cols-[6fr_4fr] gap-4">
+			<div className="flex flex-col-reverse md:grid md:grid-cols-2 lg:grid-cols-[6fr_4fr] gap-4">
 				<div className="flex flex-col justify-center">
 					{tagLine && (
 						<h1 className="leading-[0] font-sans animate-fade-up [animation-delay:100ms] opacity-0">
-							<span className="text-base font-semibold">{tagLine}</span>
+							<span className="text-base font-semibold font-mono">
+								{tagLine}
+							</span>
 						</h1>
 					)}
 					{title && (
@@ -39,7 +51,7 @@ export default function Hero1({
 						</div>
 					)}
 					{links && links.length > 0 && (
-						<div className="mt-10 flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
+						<div className="mt-4 sm:mt-6 md:mt-8 lg:mt-10 ml-auto flex flex-wrap gap-4 animate-fade-up [animation-delay:400ms] opacity-0">
 							{links.map((link) => (
 								<Button
 									key={link.title}
@@ -59,23 +71,9 @@ export default function Hero1({
 					)}
 				</div>
 				<div className="flex flex-col justify-center">
-					{image?.asset?._id ? (
-						<Image
-							className="rounded-xl animate-fade-up [animation-delay:500ms] opacity-0"
-							src={urlFor(image).url()}
-							alt={image.alt || ""}
-							width={image.asset?.metadata?.dimensions?.width || 800}
-							height={image.asset?.metadata?.dimensions?.height || 800}
-							placeholder={image?.asset?.metadata?.lqip ? "blur" : undefined}
-							blurDataURL={image?.asset?.metadata?.lqip || ""}
-							quality={100}
-						/>
-					) : (
-						<div className="min-h-80 lg:aspect-square">
-							{/* <Shapes /> */}
-							Shapes
-						</div>
-					)}
+					<div className="min-h-80 aspect-square">
+						<Shapes />
+					</div>
 				</div>
 			</div>
 		</div>

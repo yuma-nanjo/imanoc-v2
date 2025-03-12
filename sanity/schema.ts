@@ -37,6 +37,8 @@ import logoCloud1 from "./schemas/blocks/logo-cloud/logo-cloud-1";
 import faqs from "./schemas/blocks/faqs";
 import newsletter from "./schemas/blocks/forms/newsletter";
 import allPosts from "./schemas/blocks/all-posts";
+import contactform from "./schemas/blocks/forms/contactform";
+import contact from "./schemas/documents/contact";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -45,6 +47,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		post,
 		author,
 		category,
+		contact,
 		faq,
 		testimonial,
 		// shared objects
@@ -76,6 +79,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		logoCloud1,
 		faqs,
 		newsletter,
+		contactform,
 		allPosts,
 	],
 };

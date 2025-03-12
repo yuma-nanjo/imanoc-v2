@@ -50,7 +50,9 @@ export default function MobileNav({
 			</SheetTrigger>
 			<SheetContent>
 				<SheetHeader>
-					<div className="mx-auto">imanoc</div>
+					<div className="mx-auto">
+						<Logo />
+					</div>
 					<div className="sr-only">
 						<SheetTitle>Main Navigation</SheetTitle>
 						<SheetDescription>Navigate to the website pages</SheetDescription>
