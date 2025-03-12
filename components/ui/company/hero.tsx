@@ -1,24 +1,23 @@
 import type { Locale } from "@/i18n-config";
-import type { POST_QUERYResult } from "@/sanity.types";
+import type { COMPANY_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import { Mail } from "lucide-react";
 import Image from "next/image";
-import PostDate from "./date";
+import CompanyDate from "./date";
 
-type PostHero = NonNullable<POST_QUERYResult>;
+type CompanyHero = NonNullable<COMPANY_QUERYResult>;
 
-interface PostHeroProps extends PostHero {
+interface CompanyHeroProps extends CompanyHero {
 	lang?: Locale;
 }
 
-export default function PostHero({
+export default function CompanyHero({
 	title,
-	author,
 	image,
 	slug,
 	_createdAt,
 	lang,
-}: PostHeroProps) {
+}: CompanyHeroProps) {
 	return (
 		<>
 			{title && <h1 className="mb-4 md:mb-6 text-3xl lg:text-5xl">{title}</h1>}
@@ -37,32 +36,10 @@ export default function PostHero({
 			)}
 			<div className="flex items-center justify-between gap-2 text-sm md:text-base">
 				<div className="flex flex-col md:flex-row md:items-center gap-2">
-					<div className="flex items-center gap-2">
-						{author?.image?.asset?._id && (
-							<div className="relative w-6 h-6 md:w-10 md:h-10">
-								<Image
-									src={urlFor(author.image).url()}
-									alt={author.image.alt ? author.image.alt : ""}
-									fill
-									style={{
-										objectFit: "cover",
-									}}
-									placeholder={
-										author.image.asset?.metadata?.lqip ? "blur" : undefined
-									}
-									blurDataURL={author.image.asset?.metadata?.lqip || undefined}
-									sizes="40px"
-									className="w-10 h-10 rounded-full mr-2"
-								/>
-							</div>
-						)}
-						{author?.name && <div>{author.name}</div>}
-						<div className="hidden md:block">•</div>
-					</div>
-					<PostDate date={_createdAt as string} />
+					<CompanyDate date={_createdAt as string} />
 				</div>
 				<div className="flex flex-col md:flex-row gap-2">
-					<div>Share this post</div>
+					<div>Share this company</div>
 					<div className="flex gap-2">
 						<a
 							className="hover:opacity-70"

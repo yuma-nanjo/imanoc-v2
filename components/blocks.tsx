@@ -1,18 +1,20 @@
-import type { PAGE_QUERYResult } from "@/sanity.types";
-import Hero1 from "@/components/ui/hero/hero-1";
-import Hero2 from "@/components/ui/hero/hero-2";
-import SectionHeader from "@/components/ui/section-header";
-import SplitRow from "@/components/ui/split/split-row";
-import GridRow from "@/components/ui/grid/grid-row";
+import AllPosts from "@/components/ui/all-posts";
 import Carousel1 from "@/components/ui/carousel/carousel-1";
 import Carousel2 from "@/components/ui/carousel/carousel-2";
-import TimelineRow from "@/components/ui/timeline/timeline-row";
 import Cta1 from "@/components/ui/cta/cta-1";
-import LogoCloud1 from "@/components/ui/logo-cloud/logo-cloud-1";
 import FAQs from "@/components/ui/faqs";
 import FormNewsletter from "@/components/ui/forms/newsletter";
-import AllPosts from "@/components/ui/all-posts";
+import GridRow from "@/components/ui/grid/grid-row";
+import Hero1 from "@/components/ui/hero/hero-1";
+import Hero2 from "@/components/ui/hero/hero-2";
+import LogoCloud1 from "@/components/ui/logo-cloud/logo-cloud-1";
+import SectionHeader from "@/components/ui/section-header";
+import SplitRow from "@/components/ui/split/split-row";
+import TimelineRow from "@/components/ui/timeline/timeline-row";
 import type { Locale } from "@/i18n-config";
+import type { PAGE_QUERYResult } from "@/sanity.types";
+import AllCompanies from "./ui/all-companies";
+import AllServices from "./ui/all-services";
 import ContactForm from "./ui/forms/contactform";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
@@ -34,6 +36,8 @@ const componentMap: {
 	"form-newsletter": FormNewsletter,
 	"form-contact": ContactForm,
 	"all-posts": AllPosts,
+	"all-services": AllServices,
+	"all-companies": AllCompanies,
 };
 
 export default function Blocks({

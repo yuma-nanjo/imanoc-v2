@@ -450,7 +450,7 @@ export default function ContactForm({
 											</Button>
 										</DialogTrigger>
 										<DialogContent className="min-w-[80%] max-h-[90%] overflow-y-scroll">
-											<DialogHeader className="text-left prose prose-sm prose-h1:text-xl prose-h1:my-2! prose-h2:my-1! prose-h2:text-lg prose-p:my-0.5! prose-ul:pl-0! prose-ul:text-sm">
+											<DialogHeader className="text-left prose prose-sm prose-h1:text-xl prose-h1:my-2! prose-h2:my-1! prose-h2:text-lg prose-p:my-0.5! prose-ul:pl-0! prose-ul:text-sm dark:prose-invert">
 												<DialogTitle className="sr-only">
 													個人情報の取り扱いについて
 												</DialogTitle>
