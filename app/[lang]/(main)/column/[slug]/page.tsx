@@ -64,7 +64,7 @@ export default async function PostPage(props: {
 	return (
 		<section>
 			<div className="container py-16 xl:py-20">
-				<article className="max-w-3xl mx-auto">
+				<article className="max-w-3xl mx-auto prose dark:prose-invert">
 					<Breadcrumbs links={links} />
 					<PostHero {...post} lang={lang} />
 					{post.body && <PortableTextRenderer value={post.body} />}
