@@ -72,7 +72,14 @@ export default defineConfig({
 					// Optional extra filter for document types.
 					// If not set, translation is enabled for all documents
 					// that has a field with the name defined above.
-					documentTypes: ["page", "post", "testimonial", "faq"],
+					documentTypes: [
+						"page",
+						"post",
+						"service",
+						"company",
+						"testimonial",
+						"faq",
+					],
 				},
 				field: {
 					// Translate fields for the following document types

@@ -30,7 +30,7 @@ export default async function AllServices({
 					<Link
 						key={service?.slug?.current}
 						className="flex w-full rounded-3xl ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-						href={`/${lang}/column/${service?.slug?.current}`}
+						href={`/${lang}/service/${service?.slug?.current}`}
 					>
 						<ServiceCard
 							title={service?.title ?? ""}

@@ -439,7 +439,7 @@ export default function ContactForm({
 											htmlFor="privacyAgreement"
 											className="text-sm text-foreground/80"
 										>
-											個人情報の取り扱いに同意する
+											個人情報の取り扱いについてに同意する
 										</Label>
 									</div>
 									{/* モーダルで詳細表示 */}
