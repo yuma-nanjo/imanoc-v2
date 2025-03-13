@@ -2,6 +2,11 @@
 import Logo from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import {
 	Sheet,
 	SheetContent,
 	SheetHeader,
@@ -10,35 +15,22 @@ import {
 } from "@/components/ui/sheet";
 import type { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
-import type {
-	COMPANIES_QUERYResult,
-	SERVICES_QUERYResult,
-} from "@/sanity.types";
+import { cn } from "@/lib/utils";
 import type { NavItem } from "@/types";
-import { AlignRight, ChevronRight, ExternalLink } from "lucide-react";
+import { AlignRight, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { useState } from "react";
 import { LANGUAGE_LABELS } from "./index";
 import LocaleSwitcher from "./locale-switcher";
-import {
-	Collapsible,
-	CollapsibleContent,
-	CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { cn } from "@/lib/utils";
 
 export default function MobileNav({
 	navItems,
 	dictionary,
 	lang,
-	services,
-	companies,
 }: {
 	navItems: NavItem[];
 	dictionary: Awaited<ReturnType<typeof getDictionary>>;
 	lang: Locale;
-	services: SERVICES_QUERYResult;
-	companies: COMPANIES_QUERYResult;
 }) {
 	const [open, setOpen] = useState(false);
 	const [langOpen, setLangOpen] = useState(false);
@@ -76,7 +68,7 @@ export default function MobileNav({
 										>
 											{navItem.label}
 										</Link>
-										{services.map((service) => (
+										{/* {services.map((service) => (
 											<Link
 												key={service.title}
 												href={`/${lang}/service/${service?.slug?.current}`}
@@ -85,7 +77,7 @@ export default function MobileNav({
 											>
 												{service.title}
 											</Link>
-										))}
+										))} */}
 									</div>
 								) : navItem.label === dictionary.menu.company ? (
 									<div className="space-y-2 text-left">
@@ -97,7 +89,7 @@ export default function MobileNav({
 										>
 											{navItem.label}
 										</Link>
-										{companies.map((company) => (
+										{/* {companies.map((company) => (
 											<Link
 												key={company.title}
 												href={`/${lang}/company/${company?.slug?.current}`}
@@ -106,7 +98,7 @@ export default function MobileNav({
 											>
 												{company.title}
 											</Link>
-										))}
+										))} */}
 									</div>
 								) : (
 									<Link
