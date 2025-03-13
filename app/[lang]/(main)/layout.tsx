@@ -6,6 +6,7 @@ import { draftMode } from "next/headers";
 import { SanityLive } from "@/sanity/lib/live";
 import { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
+import { fetchSanityCompanies, fetchSanityServices } from "@/sanity/lib/fetch";
 
 export default async function MainLayout({
 	children,
@@ -16,9 +17,18 @@ export default async function MainLayout({
 }) {
 	const { lang } = await params;
 	const dictionary = await getDictionary(lang);
+	const [services, companies] = await Promise.all([
+		fetchSanityServices({ language: lang }),
+		fetchSanityCompanies({ language: lang }),
+	]);
 	return (
 		<>
-			<Header lang={lang} dictionary={dictionary} />
+			<Header
+				lang={lang}
+				dictionary={dictionary}
+				services={services}
+				companies={companies}
+			/>
 			<main>{children}</main>
 			<SanityLive />
 			{(await draftMode()).isEnabled && (

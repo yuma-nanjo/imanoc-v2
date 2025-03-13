@@ -51,7 +51,7 @@ export default async function ServicePage(props: {
 					href: `/${lang}/`,
 				},
 				{
-					label: dictionary.menu.column,
+					label: dictionary.menu.service,
 					href: `/${lang}/service`,
 				},
 				{
@@ -64,7 +64,7 @@ export default async function ServicePage(props: {
 	return (
 		<section>
 			<div className="container py-16 xl:py-20">
-				<article className="max-w-3xl mx-auto">
+				<article className="max-w-3xl mx-auto prose dark:prose-invert">
 					<Breadcrumbs links={links} />
 					<ServiceHero {...service} lang={lang} />
 					{service.body && <PortableTextRenderer value={service.body} />}

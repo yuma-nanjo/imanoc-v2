@@ -35,17 +35,21 @@ export default function DesktopNav({
 					href={navItem.href}
 					target={navItem.target ? "_blank" : undefined}
 					rel={navItem.target ? "noopener noreferrer" : undefined}
-					className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm"
+					className="transition-colors tracking-wider hover:text-foreground text-foreground/80 text-sm"
 				>
 					{navItem.label}
 				</Link>
 			))}
 			<div className="relative">
-				<Collapsible open={langOpen} onOpenChange={setLangOpen}>
+				<Collapsible
+					open={langOpen}
+					onOpenChange={setLangOpen}
+					className="border rounded-md"
+				>
 					<CollapsibleTrigger asChild>
 						<Button
 							variant="ghost"
-							className="flex items-center gap-2 h-8 px-3 text-sm font-medium transition-colors hover:text-foreground/80 text-foreground/60"
+							className="flex items-center gap-2 h-8 px-3 text-sm font-medium transition-colors  text-foreground/80 tracking-wider"
 						>
 							{LANGUAGE_LABELS[lang](dictionary)}
 							<ChevronDown

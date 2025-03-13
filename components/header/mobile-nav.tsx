@@ -1,38 +1,44 @@
 "use client";
+import Logo from "@/components/logo";
+import { Button } from "@/components/ui/button";
 import {
 	Sheet,
 	SheetContent,
-	SheetDescription,
 	SheetHeader,
 	SheetTitle,
 	SheetTrigger,
 } from "@/components/ui/sheet";
+import type { getDictionary } from "@/get-dictionary";
+import type { Locale } from "@/i18n-config";
+import type {
+	COMPANIES_QUERYResult,
+	SERVICES_QUERYResult,
+} from "@/sanity.types";
+import type { NavItem } from "@/types";
+import { AlignRight, ChevronRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { useState } from "react";
+import { LANGUAGE_LABELS } from "./index";
+import LocaleSwitcher from "./locale-switcher";
 import {
 	Collapsible,
 	CollapsibleContent,
 	CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import type { NavItem } from "@/types";
-import Logo from "@/components/logo";
-import { useState } from "react";
-import type { getDictionary } from "@/get-dictionary";
-import type { Locale } from "@/i18n-config";
-import LocaleSwitcher from "./locale-switcher";
-import { ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { LANGUAGE_LABELS } from "./index";
-import { AlignRight } from "lucide-react";
 
 export default function MobileNav({
 	navItems,
 	dictionary,
 	lang,
+	services,
+	companies,
 }: {
 	navItems: NavItem[];
 	dictionary: Awaited<ReturnType<typeof getDictionary>>;
 	lang: Locale;
+	services: SERVICES_QUERYResult;
+	companies: COMPANIES_QUERYResult;
 }) {
 	const [open, setOpen] = useState(false);
 	const [langOpen, setLangOpen] = useState(false);
@@ -48,59 +54,104 @@ export default function MobileNav({
 					<AlignRight className="dark:text-white" />
 				</Button>
 			</SheetTrigger>
-			<SheetContent>
+			<SheetContent className="overflow-auto bg-background/90">
 				<SheetHeader>
 					<div className="mx-auto">
 						<Logo />
 					</div>
-					<div className="sr-only">
-						<SheetTitle>Main Navigation</SheetTitle>
-						<SheetDescription>Navigate to the website pages</SheetDescription>
-					</div>
+					<SheetTitle className="sr-only">Main Navigation</SheetTitle>
 				</SheetHeader>
-				<div className="pt-10 pb-20">
-					<div className="container">
-						<ul className="list-none text-center space-y-3">
-							{navItems.map((navItem, index) => (
-								<li key={`${navItem.label}-${index}`}>
+
+				<div className="pt-10 pb-20 container">
+					<ul className="list-none text-left space-y-3">
+						{navItems.map((navItem, index) => (
+							<li key={`${navItem.label}-${index}`}>
+								{navItem.label === dictionary.menu.service ? (
+									<div className="space-y-2 text-left">
+										<Link
+											href={navItem.href}
+											target={navItem.target ? "_blank" : undefined}
+											rel={navItem.target ? "noopener noreferrer" : undefined}
+											className="block transition-colors text-lg hover:opacity-50 mb-2"
+										>
+											{navItem.label}
+										</Link>
+										{services.map((service) => (
+											<Link
+												key={service.title}
+												href={`/${lang}/service/${service?.slug?.current}`}
+												className="block text-base ml-4 hover:opacity-50"
+												onClick={() => setOpen(false)}
+											>
+												{service.title}
+											</Link>
+										))}
+									</div>
+								) : navItem.label === dictionary.menu.company ? (
+									<div className="space-y-2 text-left">
+										<Link
+											href={navItem.href}
+											target={navItem.target ? "_blank" : undefined}
+											rel={navItem.target ? "noopener noreferrer" : undefined}
+											className="block transition-colors text-lg hover:opacity-50 mb-2"
+										>
+											{navItem.label}
+										</Link>
+										{companies.map((company) => (
+											<Link
+												key={company.title}
+												href={`/${lang}/company/${company?.slug?.current}`}
+												className="block text-base ml-4 hover:opacity-50"
+												onClick={() => setOpen(false)}
+											>
+												{company.title}
+											</Link>
+										))}
+									</div>
+								) : (
 									<Link
 										onClick={() => setOpen(false)}
 										href={navItem.href}
 										target={navItem.target ? "_blank" : undefined}
 										rel={navItem.target ? "noopener noreferrer" : undefined}
-										className="hover:text-decoration-none hover:opacity-50 text-lg"
+										className="hover:opacity-50 text-lg"
 									>
 										{navItem.label}
 									</Link>
-								</li>
-							))}
-							<li>
-								<Collapsible open={langOpen} onOpenChange={setLangOpen}>
-									<CollapsibleTrigger className="p-0" asChild>
-										<Button
-											className="font-normal hover:opacity-50 hover:bg-transparent"
-											variant="ghost"
-										>
-											<div className="text-lg">
-												{LANGUAGE_LABELS[lang](dictionary)}
-											</div>
-											<ChevronRight
-												className={cn(
-													"h-6 w-6 transition-transform duration-300",
-													langOpen ? "rotate-90" : "",
-												)}
-											/>
-										</Button>
-									</CollapsibleTrigger>
-									<CollapsibleContent className="overflow-hidden data-[state=open]:animate-collapsible-down data-[state=closed]:animate-collapsible-up">
-										<div className="py-2 px-4">
-											<LocaleSwitcher className="h-10 hover:text-decoration-none hover:opacity-50 text-lg" />
-										</div>
-									</CollapsibleContent>
-								</Collapsible>
+								)}
 							</li>
-						</ul>
-					</div>
+						))}
+						<li className="mt-10">
+							<Collapsible
+								open={langOpen}
+								onOpenChange={setLangOpen}
+								className="border rounded-md inline-block"
+							>
+								<CollapsibleTrigger asChild>
+									<Button
+										variant="ghost"
+										className="font-normal hover:opacity-50 hover:text-foreground hover:bg-transparent"
+									>
+										{LANGUAGE_LABELS[lang](dictionary)}
+										<ChevronRight
+											className={cn(
+												"h-6 w-6 transition-transform text-foreground duration-300",
+												langOpen ? "rotate-90" : "",
+											)}
+										/>
+									</Button>
+								</CollapsibleTrigger>
+								<CollapsibleContent className="py-2 px-4">
+									<LocaleSwitcher className="h-10 flex items-center justify-center hover:opacity-50 text-sm" />
+								</CollapsibleContent>
+							</Collapsible>
+						</li>
+						<li>
+							<Link href="/contact" onClick={() => setOpen(false)}>
+								<Button>お問い合わせ</Button>
+							</Link>
+						</li>
+					</ul>
 				</div>
 			</SheetContent>
 		</Sheet>
