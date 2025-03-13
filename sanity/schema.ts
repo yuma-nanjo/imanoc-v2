@@ -45,6 +45,7 @@ import company from "./schemas/documents/company";
 import contact from "./schemas/documents/contact";
 import service from "./schemas/documents/service";
 import somePosts from "./schemas/blocks/some-posts";
+import categoryPosts from "./schemas/blocks/category-posts";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -90,6 +91,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		contactform,
 		allPosts,
 		somePosts,
+		categoryPosts,
 		allServices,
 		allCompanies,
 	],

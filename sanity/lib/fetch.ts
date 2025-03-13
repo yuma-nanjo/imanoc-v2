@@ -1,34 +1,38 @@
-import { sanityFetch } from "@/sanity/lib/live";
-import { PAGE_QUERY, PAGES_SLUGS_QUERY } from "@/sanity/queries/page";
-import {
-	POST_QUERY,
-	POSTS_QUERY,
-	POSTS_SLUGS_QUERY,
-} from "@/sanity/queries/post";
 import type {
-	PAGE_QUERYResult,
-	PAGES_SLUGS_QUERYResult,
-	POST_QUERYResult,
-	POSTS_QUERYResult,
-	POSTS_SLUGS_QUERYResult,
-	COMPANY_QUERYResult,
+	CATEGORY_POSTS_QUERYResult,
+	CATEGORY_QUERYResult,
 	COMPANIES_QUERYResult,
 	COMPANIES_SLUGS_QUERYResult,
+	COMPANY_QUERYResult,
+	PAGES_SLUGS_QUERYResult,
+	PAGE_QUERYResult,
+	POSTS_QUERYResult,
+	POSTS_SLUGS_QUERYResult,
+	POST_QUERYResult,
 	SERVICES_QUERYResult,
 	SERVICES_SLUGS_QUERYResult,
 	SERVICE_QUERYResult,
 } from "@/sanity.types";
-
+import { sanityFetch } from "@/sanity/lib/live";
+import { PAGES_SLUGS_QUERY, PAGE_QUERY } from "@/sanity/queries/page";
 import {
-	SERVICE_QUERY,
-	SERVICES_QUERY,
-	SERVICES_SLUGS_QUERY,
-} from "../queries/service";
+	CATEGORY_POSTS_QUERY,
+	POSTS_QUERY,
+	POSTS_SLUGS_QUERY,
+	POST_QUERY,
+} from "@/sanity/queries/post";
+
 import {
 	COMPANIES_QUERY,
 	COMPANIES_SLUGS_QUERY,
 	COMPANY_QUERY,
 } from "../queries/company";
+import {
+	SERVICES_QUERY,
+	SERVICES_SLUGS_QUERY,
+	SERVICE_QUERY,
+} from "../queries/service";
+import { CATEGORY_QUERY } from "../queries/category";
 
 export const fetchSanityPageBySlug = async ({
 	slug,
@@ -70,6 +74,18 @@ export const fetchSanityPosts = async ({
 		params: { language },
 	});
 
+	return data;
+};
+
+export const fetchSanityCategoryPosts = async ({
+	language,
+}: {
+	language: string;
+}): Promise<CATEGORY_POSTS_QUERYResult> => {
+	const { data } = await sanityFetch({
+		query: CATEGORY_POSTS_QUERY,
+		params: { language },
+	});
 	return data;
 };
 
@@ -190,3 +206,13 @@ export const fetchSanityCompanyBySlug = async ({
 
 	return data;
 };
+
+export const fetchSanityCategories =
+	async (): Promise<CATEGORY_QUERYResult> => {
+		const { data } = await sanityFetch({
+			query: CATEGORY_QUERY,
+			perspective: "published",
+			stega: false,
+		});
+		return data;
+	};
