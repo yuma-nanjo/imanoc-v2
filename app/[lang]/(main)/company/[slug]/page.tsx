@@ -14,9 +14,9 @@ export async function generateStaticParams(props: {
 	params: Promise<{ lang: Locale }>;
 }) {
 	const { lang } = await props.params;
-	const companys = await fetchSanityCompaniesStaticParams({ language: lang });
+	const companies = await fetchSanityCompaniesStaticParams({ language: lang });
 
-	return companys.map((company) => ({
+	return companies.map((company) => ({
 		slug: company.slug?.current,
 	}));
 }
@@ -31,11 +31,7 @@ export async function generateMetadata(props: {
 		notFound();
 	}
 
-	return generatePageMetadata({
-		page: company,
-		slug: `/company/${slug}`,
-		lang,
-	});
+	return generatePageMetadata({ page: company, slug: `/column/${slug}`, lang });
 }
 
 export default async function CompanyPage(props: {
@@ -55,7 +51,7 @@ export default async function CompanyPage(props: {
 					href: `/${lang}/`,
 				},
 				{
-					label: dictionary.menu.column,
+					label: dictionary.menu.company,
 					href: `/${lang}/company`,
 				},
 				{
@@ -68,7 +64,7 @@ export default async function CompanyPage(props: {
 	return (
 		<section>
 			<div className="container py-16 xl:py-20">
-				<article className="max-w-3xl mx-auto">
+				<article className="max-w-3xl mx-auto prose dark:prose-invert">
 					<Breadcrumbs links={links} />
 					<CompanyHero {...company} lang={lang} />
 					{company.body && <PortableTextRenderer value={company.body} />}

@@ -5,6 +5,7 @@ import { fetchSanityCompanies } from "@/sanity/lib/fetch";
 import { stegaClean } from "next-sanity";
 import Link from "next/link";
 import CompanyCard from "./company-card";
+import Outline from "./company/outline";
 
 type AllCompanies = Extract<
 	NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number],
@@ -25,12 +26,12 @@ export default async function AllCompanies({
 
 	return (
 		<SectionContainer color={color} padding={padding}>
-			<div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+			<div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
 				{companies.map((company) => (
 					<Link
 						key={company?.slug?.current}
 						className="flex w-full rounded-3xl ring-offset-background focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-						href={`/${lang}/column/${company?.slug?.current}`}
+						href={`/${lang}/company/${company?.slug?.current}`}
 					>
 						<CompanyCard
 							title={company?.title ?? ""}
@@ -40,6 +41,7 @@ export default async function AllCompanies({
 					</Link>
 				))}
 			</div>
+			<Outline />
 		</SectionContainer>
 	);
 }
