@@ -1,24 +1,25 @@
 import { cn } from "@/lib/utils";
-import type { POSTS_QUERYResult } from "@/sanity.types";
+import type { CATEGORY_POSTS_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
 import Image from "next/image";
 
-type PostCard = NonNullable<POSTS_QUERYResult[number]>;
+type CategoryPostCard = NonNullable<CATEGORY_POSTS_QUERYResult[number]>;
 
-interface PostCardProps extends Omit<PostCard, "slug"> {
+interface CategoryPostCardProps extends Omit<CategoryPostCard, "slug"> {
 	className?: string;
 }
 
-export default function PostCard({
+export default function CategoryPostCard({
 	className,
 	title,
 	excerpt,
 	image,
-}: PostCardProps) {
+	categories,
+}: CategoryPostCardProps) {
 	return (
 		<div
 			className={cn(
-				"flex w-full flex-col justify-between overflow-hidden transition ease-in-out group border rounded-xl p-1.5 md:p-2 lg:p-4 hover:border-primary",
+				"flex w-full flex-col justify-between overflow-hidden transition ease-in-out group border rounded-xl p-1.5 md:p-2 lg:p-4 hover:border-primary relative",
 				className,
 			)}
 		>
@@ -42,13 +43,21 @@ export default function PostCard({
 				{title && (
 					<div className="flex justify-between items-center mb-2">
 						<h3 className="font-semibold text-sm sm:text-base leading-[1.2]">
-							{title}
+							{/* {title} */}
 						</h3>
 					</div>
 				)}
 				{excerpt && (
 					<p className="text-xs sm:text-sm line-clamp-3">{excerpt}</p>
 				)}
+				{categories?.map((cat) => (
+					<span
+						className="absolute top-2 right-2 rounded-full px-2 py-1 bg-accent text-white text-xs font-mono shadow-sm font-semibold"
+						key={cat._id}
+					>
+						# {cat.title}
+					</span>
+				))}
 			</div>
 		</div>
 	);
