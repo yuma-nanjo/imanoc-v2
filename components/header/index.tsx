@@ -5,10 +5,6 @@ import { ModeToggle } from "@/components/menu-toggle";
 import type { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
 import { getNavItems } from "@/lib/nav-items";
-import type {
-	COMPANIES_QUERYResult,
-	SERVICES_QUERYResult,
-} from "@/sanity.types";
 import Link from "next/link";
 import ContactButton from "./contact-button";
 export const LANGUAGE_LABELS = {
@@ -22,16 +18,12 @@ export const LANGUAGE_LABELS = {
 		dictionary.global.zht,
 } as const;
 
-export default function Header({
+export default async function Header({
 	lang,
 	dictionary,
-	services,
-	companies,
 }: {
 	lang: Locale;
 	dictionary: Awaited<ReturnType<typeof getDictionary>>;
-	services: SERVICES_QUERYResult;
-	companies: COMPANIES_QUERYResult;
 }) {
 	const navItems = getNavItems(lang, dictionary);
 
@@ -54,13 +46,7 @@ export default function Header({
 				<div className="flex items-center xl:hidden">
 					<ContactButton />
 					<ModeToggle />
-					<MobileNav
-						services={services}
-						companies={companies}
-						navItems={navItems}
-						dictionary={dictionary}
-						lang={lang}
-					/>
+					<MobileNav navItems={navItems} dictionary={dictionary} lang={lang} />
 				</div>
 			</div>
 		</header>

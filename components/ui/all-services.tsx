@@ -21,7 +21,7 @@ export default async function AllServices({
 	colorVariant,
 }: AllServicesProps) {
 	const color = stegaClean(colorVariant);
-	const services = await fetchSanityServices({ language: lang || "en" });
+	const services = await fetchSanityServices({ language: lang || "ja" });
 
 	return (
 		<SectionContainer color={color} padding={padding}>

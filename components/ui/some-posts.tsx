@@ -22,7 +22,7 @@ export default async function SomePosts({
 	colorVariant,
 }: SomePostsProps) {
 	const color = stegaClean(colorVariant);
-	const posts = await fetchSanityPosts({ language: lang || "en" });
+	const posts = await fetchSanityPosts({ language: lang || "ja" });
 
 	return (
 		<SectionContainer color={color} padding={padding}>
