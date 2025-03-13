@@ -25,7 +25,7 @@ export default function CompanyCard({
 		>
 			<div className="flex flex-col">
 				{image?.asset?._id && (
-					<div className="mb-4 relative h-[15rem] sm:h-[20rem] md:h-[25rem] lg:h-[9.5rem] xl:h-[12rem] rounded-2xl overflow-hidden">
+					<div className="mb-4 relative h-[8rem] sm:h-[10rem] rounded-2xl overflow-hidden">
 						<Image
 							src={urlFor(image).url()}
 							alt={image.alt || ""}

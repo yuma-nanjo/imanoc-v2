@@ -18,8 +18,8 @@ export default function Footer({
 	const navItems = getNavItems(lang, dictionary);
 
 	return (
-		<footer>
-			<div className="dark:bg-background pb-5 xl:pb-5 dark:text-gray-300">
+		<footer className="pt-8">
+			<div className="pb-5 xl:pb-5">
 				<Link
 					className="flex items-center justify-center"
 					href="/"
@@ -34,7 +34,7 @@ export default function Footer({
 							href={navItem.href}
 							target={navItem.target ? "_blank" : undefined}
 							rel={navItem.target ? "noopener noreferrer" : undefined}
-							className="transition-colors hover:text-foreground/80 text-foreground/60 text-sm"
+							className="transition-colors hover:text-foreground text-foreground/80 text-sm"
 						>
 							{navItem.label}
 						</Link>
