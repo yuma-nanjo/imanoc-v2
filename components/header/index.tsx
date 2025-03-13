@@ -1,11 +1,17 @@
-import Link from "next/link";
-import Logo from "@/components/logo";
-import MobileNav from "@/components/header/mobile-nav";
 import DesktopNav from "@/components/header/desktop-nav";
+import MobileNav from "@/components/header/mobile-nav";
+import Logo from "@/components/logo";
 import { ModeToggle } from "@/components/menu-toggle";
 import type { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
 import { getNavItems } from "@/lib/nav-items";
+import { fetchSanityCompanies, fetchSanityServices } from "@/sanity/lib/fetch";
+import Link from "next/link";
+import ContactButton from "./contact-button";
+import type {
+	COMPANIES_QUERYResult,
+	SERVICES_QUERYResult,
+} from "@/sanity.types";
 
 export const LANGUAGE_LABELS = {
 	ja: (dictionary: Awaited<ReturnType<typeof getDictionary>>) =>
@@ -21,9 +27,13 @@ export const LANGUAGE_LABELS = {
 export default function Header({
 	lang,
 	dictionary,
+	services,
+	companies,
 }: {
 	lang: Locale;
 	dictionary: Awaited<ReturnType<typeof getDictionary>>;
+	services: SERVICES_QUERYResult;
+	companies: COMPANIES_QUERYResult;
 }) {
 	const navItems = getNavItems(lang, dictionary);
 
@@ -40,11 +50,19 @@ export default function Header({
 				</Link>
 				<div className="hidden xl:flex gap-7 items-center justify-between">
 					<DesktopNav navItems={navItems} dictionary={dictionary} lang={lang} />
+					<ContactButton />
 					<ModeToggle />
 				</div>
 				<div className="flex items-center xl:hidden">
+					<ContactButton />
 					<ModeToggle />
-					<MobileNav navItems={navItems} dictionary={dictionary} lang={lang} />
+					<MobileNav
+						services={services}
+						companies={companies}
+						navItems={navItems}
+						dictionary={dictionary}
+						lang={lang}
+					/>
 				</div>
 			</div>
 		</header>

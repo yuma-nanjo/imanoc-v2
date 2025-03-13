@@ -13,13 +13,13 @@ export function getNavItems(
 			target: false,
 		},
 		{
-			label: dictionary.menu.about,
-			href: `/${lang}/about`,
+			label: dictionary.menu.service,
+			href: `/${lang}/service`,
 			target: false,
 		},
 		{
-			label: dictionary.menu.service,
-			href: `/${lang}/service`,
+			label: dictionary.menu.company,
+			href: `/${lang}/company`,
 			target: false,
 		},
 		{
