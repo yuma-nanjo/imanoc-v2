@@ -1,5 +1,5 @@
 import AllPosts from "@/components/ui/all-posts";
-import SomePosts from "@/components/ui/some-posts";
+
 import Carousel1 from "@/components/ui/carousel/carousel-1";
 import Carousel2 from "@/components/ui/carousel/carousel-2";
 import Cta1 from "@/components/ui/cta/cta-1";
@@ -17,6 +17,7 @@ import type { PAGE_QUERYResult } from "@/sanity.types";
 import AllCompanies from "./ui/all-companies";
 import AllServices from "./ui/all-services";
 import ContactForm from "./ui/forms/contactform";
+import SomePosts from "./ui/some-posts";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 

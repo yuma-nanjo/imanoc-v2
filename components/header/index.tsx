@@ -5,14 +5,12 @@ import { ModeToggle } from "@/components/menu-toggle";
 import type { getDictionary } from "@/get-dictionary";
 import type { Locale } from "@/i18n-config";
 import { getNavItems } from "@/lib/nav-items";
-import { fetchSanityCompanies, fetchSanityServices } from "@/sanity/lib/fetch";
-import Link from "next/link";
-import ContactButton from "./contact-button";
 import type {
 	COMPANIES_QUERYResult,
 	SERVICES_QUERYResult,
 } from "@/sanity.types";
-
+import Link from "next/link";
+import ContactButton from "./contact-button";
 export const LANGUAGE_LABELS = {
 	ja: (dictionary: Awaited<ReturnType<typeof getDictionary>>) =>
 		dictionary.global.ja,
