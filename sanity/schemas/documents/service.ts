@@ -22,6 +22,22 @@ export default defineType({
 	],
 	fields: [
 		defineField({
+			name: "language",
+			type: "string",
+			readOnly: true,
+			group: "settings",
+			hidden: false,
+			initialValue: "ja",
+			options: {
+				list: [
+					{ title: "Japanese", value: "ja" },
+					{ title: "English", value: "en" },
+					{ title: "Chinese (Simplified)", value: "zh" },
+					{ title: "Chinese (Traditional)", value: "zht" },
+				],
+			},
+		}),
+		defineField({
 			name: "title",
 			title: "Title",
 			type: "string",
@@ -97,7 +113,14 @@ export default defineType({
 	preview: {
 		select: {
 			title: "title",
+			subtitle: "language",
 			media: "image",
+		},
+		prepare(selection) {
+			return {
+				...selection,
+				subtitle: selection.subtitle,
+			};
 		},
 	},
 });

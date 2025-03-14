@@ -1,3 +1,4 @@
+import type { Locale } from "@/i18n-config";
 import { cn } from "@/lib/utils";
 import type { CATEGORY_POSTS_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
@@ -7,6 +8,7 @@ type CategoryPostCard = NonNullable<CATEGORY_POSTS_QUERYResult[number]>;
 
 interface CategoryPostCardProps extends Omit<CategoryPostCard, "slug"> {
 	className?: string;
+	lang: Locale;
 }
 
 export default function CategoryPostCard({
@@ -15,6 +17,7 @@ export default function CategoryPostCard({
 	excerpt,
 	image,
 	categories,
+	lang,
 }: CategoryPostCardProps) {
 	return (
 		<div
@@ -55,7 +58,7 @@ export default function CategoryPostCard({
 						className="absolute top-2 right-2 rounded-full px-2 py-1 bg-accent text-white text-xs font-mono shadow-sm font-semibold"
 						key={cat._id}
 					>
-						# {cat.title}
+						# {cat.internationalizedTitle?.find((t) => t._key === lang)?.value}
 					</span>
 				))}
 			</div>

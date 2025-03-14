@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 
-export const SERVICE_QUERY = groq`*[_type == "service" && slug.current == $slug][0]{
+export const SERVICE_QUERY = groq`*[_type == "service" && slug.current == $slug && language == $language][0]{
     title,
     slug,
     image{
@@ -56,7 +56,7 @@ export const SERVICE_QUERY = groq`*[_type == "service" && slug.current == $slug]
     }
 }`;
 
-export const SERVICES_QUERY = groq`*[_type == "service" && defined(slug)] | order(_createdAt desc){
+export const SERVICES_QUERY = groq`*[_type == "service" && defined(slug) && language == $language] | order(_createdAt desc){
     title,
     slug,
     excerpt,
@@ -77,4 +77,4 @@ export const SERVICES_QUERY = groq`*[_type == "service" && defined(slug)] | orde
     },
 }`;
 
-export const SERVICES_SLUGS_QUERY = groq`*[_type == "service" && defined(slug)]{slug}`;
+export const SERVICES_SLUGS_QUERY = groq`*[_type == "service" && defined(slug) && language == $language]{slug}`;

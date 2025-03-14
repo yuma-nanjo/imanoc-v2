@@ -101,7 +101,7 @@ export const CATEGORY_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && l
   title,
   slug,
   excerpt,
-  categories[]->{_id, title},
+  categories[]->{_id, title,internationalizedTitle},
   image{
     asset->{
       _id,

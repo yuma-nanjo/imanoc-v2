@@ -47,7 +47,7 @@ export default defineConfig({
 				{ id: "zh", title: "Chinese (Simplified)" },
 				{ id: "zht", title: "Chinese (Traditional)" },
 			],
-			schemaTypes: ["page", "post", "testimonial", "faq"],
+			schemaTypes: ["page", "post", "service", "company", "testimonial", "faq"],
 		}),
 		// only if you want to translate fields, for example:
 		// category names for filters
