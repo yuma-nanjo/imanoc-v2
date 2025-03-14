@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import type { Locale } from "@/i18n-config";
+
 import Link from "next/link";
 
 export default function Custom404() {
