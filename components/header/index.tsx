@@ -31,7 +31,7 @@ export default async function Header({
 		<header className="sticky top-0 w-full border-border/40 bg-background/95 z-50">
 			<div className="container flex items-center justify-between h-14">
 				<Link
-					href="/"
+					href={`/${lang}/`}
 					aria-label="Home page"
 					className="flex gap-2 justify-center items-center"
 				>
@@ -40,11 +40,11 @@ export default async function Header({
 				</Link>
 				<div className="hidden xl:flex gap-7 items-center justify-between">
 					<DesktopNav navItems={navItems} dictionary={dictionary} lang={lang} />
-					<ContactButton />
+					<ContactButton lang={lang} />
 					<ModeToggle />
 				</div>
 				<div className="flex items-center xl:hidden">
-					<ContactButton />
+					<ContactButton lang={lang} />
 					<ModeToggle />
 					<MobileNav navItems={navItems} dictionary={dictionary} lang={lang} />
 				</div>

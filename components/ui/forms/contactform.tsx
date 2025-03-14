@@ -38,6 +38,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "../select";
+import { contactDictionaries } from "@/dictionaries/contactDictionaries";
 
 // Sanity からフォームブロックを抽出する型
 type FormContactProps = Extract<
@@ -45,62 +46,63 @@ type FormContactProps = Extract<
 	{ _type: "form-contact" }
 >;
 
-const contactFormSchema = z.object({
-	// 導入希望時期
-	implementationTiming: z.enum([
-		"すぐにでも",
-		"1ヶ月以内",
-		"3ヶ月以内",
-		"半年以内",
-		"情報収集段階",
-	]),
-	// 興味を持っているサービス
-	interestedService: z.enum([
-		"コンテンツサイト開発",
-		"コンテンツマーケティング",
-		"コンテンツ運用支援",
-		"その他",
-	]),
-	// お問い合わせ内容
-	inquiryContent: z
-		.string()
-		.min(1, { message: "お問い合わせ内容を入力してください" }),
-	// 会社名
-	companyName: z.string(),
-	// 会社URL（URL形式）
-	companyUrl: z.string(),
-	// 氏名
-	name: z.string().min(1, { message: "氏名を入力してください" }),
-	// メールアドレス
-	mail: z
-		.string()
-		.min(1, { message: "メールアドレスを入力してください" })
-		.email({ message: "有効なメールアドレスを入力してください" }),
-	// 電話番号
-	phone: z.string(),
-	// 部署
-	department: z.string(),
-	// 役職
-	position: z.string(),
-	// 個人情報の取り扱い（チェック必須）
-	privacyAgreement: z.boolean().refine((val) => val === true, {
-		message: "個人情報の取り扱いに同意してください",
-	}),
-});
-
 export default function ContactForm({
 	padding,
 	colorVariant,
 	consentText,
 	buttonText,
 	successMessage,
+	language: lang,
 }: FormContactProps) {
+	const dictionary = contactDictionaries[lang || "ja"].contactForm;
+	const contactFormSchema = z.object({
+		// 導入希望時期
+		implementationTiming: z.enum([
+			dictionary.timingOptions.immediately,
+			dictionary.timingOptions.within_1_month,
+			dictionary.timingOptions.within_3_months,
+			dictionary.timingOptions.within_6_months,
+			dictionary.timingOptions.research_phase,
+		]),
+		// 興味を持っているサービス
+		interestedService: z.enum([
+			dictionary.serviceOptions.site_development,
+			dictionary.serviceOptions.content_marketing,
+			dictionary.serviceOptions.content_operation,
+			dictionary.serviceOptions.other,
+		]),
+		// お問い合わせ内容
+		inquiryContent: z
+			.string()
+			.min(1, { message: dictionary.validation.inquiryContentRequired }),
+		// 会社名
+		companyName: z.string(),
+		// 会社URL（URL形式）
+		companyUrl: z.string(),
+		// 氏名
+		name: z.string().min(1, { message: dictionary.validation.nameRequired }),
+		// メールアドレス
+		mail: z
+			.string()
+			.min(1, { message: dictionary.validation.emailRequired })
+			.email({ message: dictionary.validation.emailInvalid }),
+		// 電話番号
+		phone: z.string(),
+		// 部署
+		department: z.string(),
+		// 役職
+		position: z.string(),
+		// 個人情報の取り扱い（チェック必須）
+		privacyAgreement: z.boolean().refine((val) => val === true, {
+			message: dictionary.validation.privacyAgreementRequired,
+		}),
+	});
 	const form = useForm<z.infer<typeof contactFormSchema>>({
 		resolver: zodResolver(contactFormSchema),
 		defaultValues: {
-			implementationTiming: "すぐにでも",
+			implementationTiming: dictionary.timingOptions.immediately,
 			inquiryContent: "",
-			interestedService: "コンテンツサイト開発",
+			interestedService: dictionary.serviceOptions.site_development,
 			companyName: "",
 			companyUrl: "",
 			name: "",
@@ -157,19 +159,40 @@ export default function ContactForm({
 									htmlFor="implementationTiming"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									導入希望時期<span className="text-red-500">*</span>
+									{dictionary.implementationTiming}
+									<span className="text-red-500">*</span>
 								</Label>
 								<FormControl className="flex-1">
 									<Select onValueChange={field.onChange} value={field.value}>
 										<SelectTrigger id="implementationTiming">
-											<SelectValue placeholder="選択してください" />
+											<SelectValue
+												placeholder={dictionary.validation.selectRequired}
+											/>
 										</SelectTrigger>
 										<SelectContent>
-											<SelectItem value="すぐにでも">すぐにでも</SelectItem>
-											<SelectItem value="1ヶ月以内">1ヶ月以内</SelectItem>
-											<SelectItem value="3ヶ月以内">3ヶ月以内</SelectItem>
-											<SelectItem value="半年以内">半年以内</SelectItem>
-											<SelectItem value="情報収集段階">情報収集段階</SelectItem>
+											<SelectItem value={dictionary.timingOptions.immediately}>
+												{dictionary.timingOptions.immediately}
+											</SelectItem>
+											<SelectItem
+												value={dictionary.timingOptions.within_1_month}
+											>
+												{dictionary.timingOptions.within_1_month}
+											</SelectItem>
+											<SelectItem
+												value={dictionary.timingOptions.within_3_months}
+											>
+												{dictionary.timingOptions.within_3_months}
+											</SelectItem>
+											<SelectItem
+												value={dictionary.timingOptions.within_6_months}
+											>
+												{dictionary.timingOptions.within_6_months}
+											</SelectItem>
+											<SelectItem
+												value={dictionary.timingOptions.research_phase}
+											>
+												{dictionary.timingOptions.research_phase}
+											</SelectItem>
 										</SelectContent>
 									</Select>
 								</FormControl>
@@ -188,25 +211,35 @@ export default function ContactForm({
 									htmlFor="interestedService"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									興味を持っているサービス
+									{dictionary.interestedService}
 									<span className="text-red-500">*</span>
 								</Label>
 								<FormControl className="flex-1">
 									<Select onValueChange={field.onChange} value={field.value}>
 										<SelectTrigger id="interestedService">
-											<SelectValue placeholder="選択してください" />
+											<SelectValue
+												placeholder={dictionary.validation.selectRequired}
+											/>
 										</SelectTrigger>
 										<SelectContent>
-											<SelectItem value="コンテンツサイト開発">
-												コンテンツサイト開発
+											<SelectItem
+												value={dictionary.serviceOptions.site_development}
+											>
+												{dictionary.serviceOptions.site_development}
 											</SelectItem>
-											<SelectItem value="コンテンツマーケティング">
-												コンテンツマーケティング
+											<SelectItem
+												value={dictionary.serviceOptions.content_marketing}
+											>
+												{dictionary.serviceOptions.content_marketing}
 											</SelectItem>
-											<SelectItem value="コンテンツ運用支援">
-												コンテンツ運用支援
+											<SelectItem
+												value={dictionary.serviceOptions.content_operation}
+											>
+												{dictionary.serviceOptions.content_operation}
 											</SelectItem>
-											<SelectItem value="その他">その他</SelectItem>
+											<SelectItem value={dictionary.serviceOptions.other}>
+												{dictionary.serviceOptions.other}
+											</SelectItem>
 										</SelectContent>
 									</Select>
 								</FormControl>
@@ -225,13 +258,14 @@ export default function ContactForm({
 									htmlFor="inquiryContent"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									お問い合わせ内容<span className="text-red-500">*</span>
+									{dictionary.inquiryContent}
+									<span className="text-red-500">*</span>
 								</Label>
 								<FormControl className="flex-1">
 									<Textarea
 										{...field}
 										id="inquiryContent"
-										placeholder="お問い合わせ内容を入力"
+										placeholder={dictionary.inquiryContent}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -250,13 +284,13 @@ export default function ContactForm({
 									htmlFor="companyName"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									会社名
+									{dictionary.companyName}
 								</Label>
 								<FormControl className="flex-1">
 									<Input
 										{...field}
 										id="companyName"
-										placeholder="会社名"
+										placeholder={dictionary.companyName}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -275,7 +309,7 @@ export default function ContactForm({
 									htmlFor="companyUrl"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									会社URL
+									{dictionary.companyUrl}
 								</Label>
 								<FormControl className="flex-1">
 									<Input
@@ -300,13 +334,14 @@ export default function ContactForm({
 									htmlFor="name"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									氏名<span className="text-red-500">*</span>
+									{dictionary.name}
+									<span className="text-red-500">*</span>
 								</Label>
 								<FormControl className="flex-1">
 									<Input
 										{...field}
 										id="name"
-										placeholder="氏名"
+										placeholder={dictionary.name}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -325,14 +360,15 @@ export default function ContactForm({
 									htmlFor="mail"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									メールアドレス<span className="text-red-500">*</span>
+									{dictionary.mail}
+									<span className="text-red-500">*</span>
 								</Label>
 								<FormControl className="flex-1">
 									<Input
 										{...field}
 										id="mail"
 										type="email"
-										placeholder="メールアドレス"
+										placeholder={dictionary.mail}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -351,13 +387,13 @@ export default function ContactForm({
 									htmlFor="phone"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									電話番号
+									{dictionary.phone}
 								</Label>
 								<FormControl className="flex-1">
 									<Input
 										{...field}
 										id="phone"
-										placeholder="電話番号"
+										placeholder={dictionary.phone}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -376,13 +412,13 @@ export default function ContactForm({
 									htmlFor="department"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									部署
+									{dictionary.department}
 								</Label>
 								<FormControl className="flex-1">
 									<Input
 										{...field}
 										id="department"
-										placeholder="部署"
+										placeholder={dictionary.department}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -401,13 +437,13 @@ export default function ContactForm({
 									htmlFor="position"
 									className="w-44 md:text-right text-sm text-foreground/80"
 								>
-									役職
+									{dictionary.position}
 								</Label>
 								<FormControl className="flex-1">
 									<Input
 										{...field}
 										id="position"
-										placeholder="役職"
+										placeholder={dictionary.position}
 										className="text-xs"
 									/>
 								</FormControl>
@@ -439,20 +475,20 @@ export default function ContactForm({
 											htmlFor="privacyAgreement"
 											className="text-sm text-foreground/80"
 										>
-											個人情報の取り扱いについてに同意する
+											{dictionary.privacyAgreement}
 										</Label>
 									</div>
 									{/* モーダルで詳細表示 */}
 									<Dialog>
 										<DialogTrigger asChild>
 											<Button variant="link" className="text-sm px-1">
-												個人情報の取り扱いについて
+												{dictionary.privacyPolicy}
 											</Button>
 										</DialogTrigger>
 										<DialogContent className="min-w-[80%] max-h-[90%] overflow-y-scroll">
 											<DialogHeader className="text-left prose prose-sm prose-h1:text-xl prose-h1:my-2! prose-h2:my-1! prose-h2:text-lg prose-p:my-0.5! prose-ul:pl-0! prose-ul:text-sm dark:prose-invert">
 												<DialogTitle className="sr-only">
-													個人情報の取り扱いについて
+													{dictionary.privacyPolicy}
 												</DialogTitle>
 												<DialogDescription asChild>
 													{consentText && (

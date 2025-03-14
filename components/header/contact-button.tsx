@@ -1,14 +1,15 @@
 import { Mail } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import type { Locale } from "@/i18n-config";
 
-const ContactButton = () => {
+const ContactButton = ({ lang }: { lang: Locale }) => {
 	return (
-		<Button variant="ghost" size="icon">
-			<Link href="/contact">
+		<Link href={`/${lang}/contact`}>
+			<Button variant="ghost" size="icon" className="cursor-pointer">
 				<Mail className="h-[1.2rem] w-[1.2rem]" />
-			</Link>
-		</Button>
+			</Button>
+		</Link>
 	);
 };
 

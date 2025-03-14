@@ -10,6 +10,19 @@ export default defineType({
 	icon: MessageSquare,
 	fields: [
 		defineField({
+			name: "language",
+			type: "string",
+			initialValue: "ja",
+			options: {
+				list: [
+					{ title: "Japanese", value: "ja" },
+					{ title: "English", value: "en" },
+					{ title: "Chinese (Simplified)", value: "zh" },
+					{ title: "Chinese (Traditional)", value: "zht" },
+				],
+			},
+		}),
+		defineField({
 			name: "padding",
 			type: "section-padding",
 		}),

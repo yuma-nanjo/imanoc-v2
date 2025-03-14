@@ -7,12 +7,11 @@ export function cn(...inputs: ClassValue[]) {
 
 export const formatDate = (date: string): string => {
 	const dateObj = new Date(date);
-	const options: Intl.DateTimeFormatOptions = {
-		year: "numeric",
-		month: "long",
-		day: "numeric",
-	};
-	return dateObj.toLocaleDateString("ja-JP", options);
+	const year = dateObj.getFullYear();
+	const month = String(dateObj.getMonth() + 1).padStart(2, "0");
+	const day = String(dateObj.getDate()).padStart(2, "0");
+
+	return `${year}-${month}-${day}`;
 };
 
 // Define the types for block content and children
