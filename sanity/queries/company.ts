@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
 
-export const COMPANY_QUERY = groq`*[_type == "company" && slug.current == $slug][0]{
+export const COMPANY_QUERY = groq`*[_type == "company" && slug.current == $slug && language == $language][0]{
     title,
     slug,
     image{
@@ -56,7 +56,7 @@ export const COMPANY_QUERY = groq`*[_type == "company" && slug.current == $slug]
     }
 }`;
 
-export const COMPANIES_QUERY = groq`*[_type == "company" && defined(slug)] | order(_createdAt desc){
+export const COMPANIES_QUERY = groq`*[_type == "company" && defined(slug) && language == $language] | order(_createdAt desc){
     title,
     slug,
     excerpt,
@@ -77,4 +77,4 @@ export const COMPANIES_QUERY = groq`*[_type == "company" && defined(slug)] | ord
     },
 }`;
 
-export const COMPANIES_SLUGS_QUERY = groq`*[_type == "company" && defined(slug)]{slug}`;
+export const COMPANIES_SLUGS_QUERY = groq`*[_type == "company" && defined(slug) && language == $language]{slug}`;

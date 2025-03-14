@@ -37,7 +37,10 @@ export default async function CategoryPosts({
 					<TabsTrigger value="All">All</TabsTrigger>
 					{allCategories.map((category) => (
 						<TabsTrigger key={category._id} value={category.title || ""}>
-							{category.title}
+							{
+								category.internationalizedTitle?.find((t) => t._key === lang)
+									?.value
+							}
 						</TabsTrigger>
 					))}
 				</TabsList>
@@ -56,6 +59,7 @@ export default async function CategoryPosts({
 									excerpt={post?.excerpt ?? ""}
 									image={post?.image ?? null}
 									categories={post?.categories ?? []}
+									lang={lang || "ja"}
 								/>
 							</Link>
 						))}
@@ -83,6 +87,7 @@ export default async function CategoryPosts({
 											excerpt={post?.excerpt ?? ""}
 											image={post?.image ?? null}
 											categories={post?.categories ?? []}
+											lang={lang || "ja"}
 										/>
 									</Link>
 								))}

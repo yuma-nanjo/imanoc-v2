@@ -41,7 +41,7 @@ export default async function AllCompanies({
 					</Link>
 				))}
 			</div>
-			<Outline />
+			<Outline lang={lang || "ja"} />
 		</SectionContainer>
 	);
 }
