@@ -8,25 +8,66 @@ import { i18n, type Locale } from "@/i18n-config";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
-export const metadata: Metadata = {
-	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ""),
-	title: {
-		template: "%s | imanocはコンテンツ作りのパートナー",
-		default: "imanoc株式会社｜imanocはコンテンツ作りのパートナー",
-	},
-	openGraph: {
-		images: [
-			{
-				url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/og-image.jpg`,
-				width: 1200,
-				height: 630,
-			},
-		],
-		locale: "ja_JP",
-		type: "website",
-	},
-	robots: !isProduction ? "noindex, nofollow" : "index, follow",
-};
+// 動的に metadata を生成するため generateMetadata を使用
+export async function generateMetadata({
+	params,
+}: {
+	params: { lang: Locale };
+}): Promise<Metadata> {
+	const { lang } = params;
+
+	// 言語ごとのタイトルと Open Graph の locale を設定
+	let titleTemplate: string;
+	let titleDefault: string;
+	let ogLocale: string;
+
+	switch (lang) {
+		case "ja":
+			titleTemplate = "%s | imanocはコンテンツ作りのパートナー";
+			titleDefault = "imanoc株式会社｜imanocはコンテンツ作りのパートナー";
+			ogLocale = "ja_JP";
+			break;
+		case "en":
+			titleTemplate = "%s | imanoc Content Partner";
+			titleDefault = "imanoc Inc. | Your Content Partner";
+			ogLocale = "en_US";
+			break;
+		case "zh":
+			titleTemplate = "%s | imanoc内容合作伙伴";
+			titleDefault = "imanoc股份有限公司｜imanoc内容合作伙伴";
+			ogLocale = "zh_CN";
+			break;
+		case "zht":
+			titleTemplate = "%s | imanoc內容合作夥伴";
+			titleDefault = "imanoc股份有限公司｜imanoc內容合作夥伴";
+			ogLocale = "zh_TW";
+			break;
+		default:
+			titleTemplate = "%s | imanoc Content Partner";
+			titleDefault = "imanoc Inc. | Your Content Partner";
+			ogLocale = "en_US";
+	}
+
+	return {
+		metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ""),
+		title: {
+			template: titleTemplate,
+			default: titleDefault,
+		},
+		openGraph: {
+			images: [
+				{
+					url: `${process.env.NEXT_PUBLIC_SITE_URL}/images/og-image.jpg`,
+					width: 1200,
+					height: 630,
+				},
+			],
+			locale: ogLocale,
+			type: "website",
+		},
+		robots: !isProduction ? "noindex, nofollow" : "index, follow",
+	};
+}
 
 const fontSans = FontSans({
 	subsets: ["latin"],
