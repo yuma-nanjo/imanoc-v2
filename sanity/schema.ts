@@ -27,11 +27,14 @@ import hero2 from "./schemas/blocks/hero/hero-2";
 import logoCloud1 from "./schemas/blocks/logo-cloud/logo-cloud-1";
 import sectionHeader from "./schemas/blocks/section-header";
 // Schema UI shared objects
+import categoryPosts from "./schemas/blocks/category-posts";
+import newsPosts from "./schemas/blocks/news-posts";
 import blockContent from "./schemas/blocks/shared/block-content";
 import { buttonVariant } from "./schemas/blocks/shared/button-variant";
 import { colorVariant } from "./schemas/blocks/shared/color-variant";
 import link from "./schemas/blocks/shared/link";
 import sectionPadding from "./schemas/blocks/shared/section-padding";
+import somePosts from "./schemas/blocks/some-posts";
 import splitCard from "./schemas/blocks/split/split-card";
 import splitCardsList from "./schemas/blocks/split/split-cards-list";
 import splitContent from "./schemas/blocks/split/split-content";
@@ -44,8 +47,6 @@ import timelinesOne from "./schemas/blocks/timeline/timelines-1";
 import company from "./schemas/documents/company";
 import contact from "./schemas/documents/contact";
 import service from "./schemas/documents/service";
-import somePosts from "./schemas/blocks/some-posts";
-import categoryPosts from "./schemas/blocks/category-posts";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
 	types: [
@@ -92,6 +93,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
 		allPosts,
 		somePosts,
 		categoryPosts,
+		newsPosts,
 		allServices,
 		allCompanies,
 	],

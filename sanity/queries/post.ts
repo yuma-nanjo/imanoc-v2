@@ -97,7 +97,7 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language =
     },
 }`;
 
-export const CATEGORY_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language] | order(_createdAt desc){
+export const CATEGORY_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && !("news" in categories[]->title)] | order(_createdAt desc){
   title,
   slug,
   excerpt,
@@ -117,6 +117,12 @@ export const CATEGORY_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && l
     },
     alt
   },
+}`;
+
+export const NEWS_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && ("News" in categories[]->title)] | order(_createdAt desc){
+  title,
+  slug,
+  _createdAt
 }`;
 
 export const POSTS_SLUGS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language]{slug}`;

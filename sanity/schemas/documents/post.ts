@@ -28,7 +28,7 @@ export default defineType({
 			readOnly: true,
 			group: "settings",
 			hidden: false,
-			initialValue: "en",
+			initialValue: "ja",
 			options: {
 				list: [
 					{ title: "Japanese", value: "ja" },

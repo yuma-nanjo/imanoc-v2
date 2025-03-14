@@ -43,7 +43,7 @@ export default function CategoryPostCard({
 				{title && (
 					<div className="flex justify-between items-center mb-2">
 						<h3 className="font-semibold text-sm sm:text-base leading-[1.2]">
-							{/* {title} */}
+							{title}
 						</h3>
 					</div>
 				)}

@@ -19,6 +19,7 @@ import AllServices from "./ui/all-services";
 import ContactForm from "./ui/forms/contactform";
 import SomePosts from "./ui/some-posts";
 import CategoryPosts from "./ui/category-posts";
+import NewsPosts from "./ui/news-posts";
 
 type Block = NonNullable<NonNullable<PAGE_QUERYResult>["blocks"]>[number];
 
@@ -41,6 +42,7 @@ const componentMap: {
 	"all-posts": AllPosts,
 	"some-posts": SomePosts,
 	"category-posts": CategoryPosts,
+	"news-posts": NewsPosts,
 	"all-services": AllServices,
 	"all-companies": AllCompanies,
 };

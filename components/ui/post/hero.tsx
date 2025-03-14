@@ -1,9 +1,11 @@
 import type { Locale } from "@/i18n-config";
 import type { POST_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
-import { Mail } from "lucide-react";
+import { Mail, Share } from "lucide-react";
 import Image from "next/image";
 import PostDate from "./date";
+import FacebookLogo from "@/components/brand/facebook";
+import LinkedinLogo from "@/components/brand/linkedin";
 
 type PostHero = NonNullable<POST_QUERYResult>;
 
@@ -52,7 +54,7 @@ export default function PostHero({
 									}
 									blurDataURL={author.image.asset?.metadata?.lqip || undefined}
 									sizes="40px"
-									className="w-10 h-10 rounded-full mr-2"
+									className="w-10 h-10 rounded-full mr-2 my-0!"
 								/>
 							</div>
 						)}
@@ -61,8 +63,11 @@ export default function PostHero({
 					</div>
 					<PostDate date={_createdAt as string} />
 				</div>
-				<div className="flex flex-col md:flex-row gap-2">
-					<div>Share this post</div>
+				<div className="flex items-center gap-4 p-2 border rounded-md">
+					<div className="flex items-center gap-1">
+						<Share className="text-foreground/80 w-4 h-4" />
+						<span>Share</span>
+					</div>
 					<div className="flex gap-2">
 						<a
 							className="hover:opacity-70"
@@ -72,29 +77,17 @@ export default function PostHero({
 							aria-label="Share on Facebook"
 							title="Share on Facebook"
 						>
-							<svg
-								width="24"
-								height="24"
-								viewBox="0 0 24 24"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
-							>
-								<title>Logo</title>
-								<path
-									d="M22 12.3038C22 6.74719 17.5229 2.24268 12 2.24268C6.47715 2.24268 2 6.74719 2 12.3038C2 17.3255 5.65684 21.4879 10.4375 22.2427V15.2121H7.89844V12.3038H10.4375V10.0872C10.4375 7.56564 11.9305 6.1728 14.2146 6.1728C15.3088 6.1728 16.4531 6.36931 16.4531 6.36931V8.84529H15.1922C13.95 8.84529 13.5625 9.6209 13.5625 10.4166V12.3038H16.3359L15.8926 15.2121H13.5625V22.2427C18.3432 21.4879 22 17.3257 22 12.3038Z"
-									className="fill-black dark:fill-white"
-								/>
-							</svg>
+							<FacebookLogo />
 						</a>
 						<a
 							className="hover:opacity-70"
-							href={`mailto:?subject=${title}&body=${title}%0A%0A${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/column/${slug?.current}`}
+							href={`https://www.linkedin.com/shareArticle?mini=true&url=${process.env.NEXT_PUBLIC_SITE_URL}/${lang}/column/${slug?.current}&title=${title}`}
 							target="_blank"
 							rel="noopener noreferrer"
-							aria-label="Share via email"
-							title="Share via email"
+							aria-label="Share on LinkedIn"
+							title="Share on LinkedIn"
 						>
-							<Mail size={24} />
+							<LinkedinLogo />
 						</a>
 					</div>
 				</div>

@@ -65,6 +65,7 @@ export default function MobileNav({
 											target={navItem.target ? "_blank" : undefined}
 											rel={navItem.target ? "noopener noreferrer" : undefined}
 											className="block transition-colors text-lg hover:opacity-50 mb-2"
+											onClick={() => setOpen(false)}
 										>
 											{navItem.label}
 										</Link>
@@ -86,6 +87,7 @@ export default function MobileNav({
 											target={navItem.target ? "_blank" : undefined}
 											rel={navItem.target ? "noopener noreferrer" : undefined}
 											className="block transition-colors text-lg hover:opacity-50 mb-2"
+											onClick={() => setOpen(false)}
 										>
 											{navItem.label}
 										</Link>

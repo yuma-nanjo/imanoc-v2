@@ -17,6 +17,7 @@ import { splitRowQuery } from "./split/split-row";
 import { timelineQuery } from "./timeline";
 import { somePostsQuery } from "./some-posts";
 import { categoryPostsQuery } from "./category-posts";
+import { newsPostsQuery } from "./news-posts";
 
 export const PAGE_QUERY = groq`
   *[_type == "page" && slug.current == $slug && language == $language][0]{
@@ -37,6 +38,7 @@ export const PAGE_QUERY = groq`
       ${allPostsQuery},
       ${somePostsQuery},
       ${categoryPostsQuery},
+      ${newsPostsQuery},
       ${allServicesQuery},
       ${allCompaniesQuery},
     },

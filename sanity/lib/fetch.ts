@@ -4,6 +4,7 @@ import type {
 	COMPANIES_QUERYResult,
 	COMPANIES_SLUGS_QUERYResult,
 	COMPANY_QUERYResult,
+	NEWS_POSTS_QUERYResult,
 	PAGES_SLUGS_QUERYResult,
 	PAGE_QUERYResult,
 	POSTS_QUERYResult,
@@ -17,6 +18,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { PAGES_SLUGS_QUERY, PAGE_QUERY } from "@/sanity/queries/page";
 import {
 	CATEGORY_POSTS_QUERY,
+	NEWS_POSTS_QUERY,
 	POSTS_QUERY,
 	POSTS_SLUGS_QUERY,
 	POST_QUERY,
@@ -84,6 +86,18 @@ export const fetchSanityCategoryPosts = async ({
 }): Promise<CATEGORY_POSTS_QUERYResult> => {
 	const { data } = await sanityFetch({
 		query: CATEGORY_POSTS_QUERY,
+		params: { language },
+	});
+	return data;
+};
+
+export const fetchSanityNewsPosts = async ({
+	language,
+}: {
+	language: string;
+}): Promise<NEWS_POSTS_QUERYResult> => {
+	const { data } = await sanityFetch({
+		query: NEWS_POSTS_QUERY,
 		params: { language },
 	});
 	return data;
