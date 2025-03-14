@@ -72,8 +72,7 @@ export default function Hero1({
 				</div>
 				<div className="flex flex-col justify-center">
 					<div className="min-h-80 aspect-square">
-						{/* <Shapes /> */}
-						Shapes
+						<Shapes />
 					</div>
 				</div>
 			</div>
