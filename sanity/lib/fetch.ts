@@ -72,7 +72,7 @@ export const fetchSanityPosts = async ({
 	language: string;
 }): Promise<POSTS_QUERYResult> => {
 	const { data } = await sanityFetch({
-		query: SERVICES_QUERY,
+		query: POSTS_QUERY,
 		params: { language },
 	});
 
