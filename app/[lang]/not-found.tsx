@@ -21,7 +21,7 @@ export default async function NotFoundPage({
 	return (
 		<>
 			<Header lang={i18n.defaultLocale} dictionary={dictionary} />
-			<Custom404 />
+			<Custom404 lang={(await params).lang} />
 			<Footer lang={i18n.defaultLocale} dictionary={dictionary} />
 		</>
 	);
