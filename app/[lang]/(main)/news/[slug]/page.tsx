@@ -10,6 +10,7 @@ import {
 import { generatePageMetadata } from "@/sanity/lib/metadata";
 import type { Locale } from "@/i18n-config";
 import { getDictionary } from "@/get-dictionary";
+import NewsHero from "@/components/ui/post/news-hero";
 export async function generateStaticParams(props: {
 	params: Promise<{ lang: Locale }>;
 }) {
@@ -51,8 +52,8 @@ export default async function PostPage(props: {
 					href: `/${lang}/`,
 				},
 				{
-					label: dictionary.menu.column,
-					href: `/${lang}/column`,
+					label: dictionary.menu.news,
+					href: `/${lang}/news`,
 				},
 				{
 					label: post.title as string,
@@ -66,7 +67,7 @@ export default async function PostPage(props: {
 			<div className="container py-16 xl:py-20">
 				<article className="max-w-3xl mx-auto">
 					<Breadcrumbs links={links} />
-					<PostHero {...post} lang={lang} />
+					<NewsHero {...post} lang={lang} />
 					{post.body && <PortableTextRenderer value={post.body} />}
 				</article>
 			</div>

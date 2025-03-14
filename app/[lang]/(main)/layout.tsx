@@ -19,7 +19,7 @@ export default async function MainLayout({
 	return (
 		<>
 			<Header lang={lang} dictionary={dictionary} />
-			<main>{children}</main>
+			<main className="flex-grow">{children}</main>
 			<SanityLive />
 			{(await draftMode()).isEnabled && (
 				<>
