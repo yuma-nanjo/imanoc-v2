@@ -51,7 +51,7 @@ export default async function RootLayout({
 			<link rel="icon" href="/favicon.ico" />
 			<body
 				className={cn(
-					"min-h-screen bg-background font-sans antialiased overscroll-none",
+					"min-h-screen bg-background font-sans antialiased overscroll-none flex flex-col",
 					fontSans.variable,
 				)}
 			>
