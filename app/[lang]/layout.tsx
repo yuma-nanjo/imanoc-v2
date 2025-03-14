@@ -11,8 +11,8 @@ const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 export const metadata: Metadata = {
 	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || ""),
 	title: {
-		template: "%s | コンテンツ作りのパートナー",
-		default: "imanoc株式会社｜コンテンツ作りのパートナー",
+		template: "%s | imanocはコンテンツ作りのパートナー",
+		default: "imanoc株式会社｜imanocはコンテンツ作りのパートナー",
 	},
 	openGraph: {
 		images: [

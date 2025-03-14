@@ -41,7 +41,7 @@ export default function MobileNav({
 				<Button
 					aria-label="Open Menu"
 					variant="ghost"
-					className="w-10 p-5 focus-visible:ring-1 focus-visible:ring-offset-1"
+					className="w-10 p-5 focus-visible:ring-1 focus-visible:ring-offset-1 cursor-pointer"
 				>
 					<AlignRight className="dark:text-white" />
 				</Button>
@@ -124,7 +124,7 @@ export default function MobileNav({
 								<CollapsibleTrigger asChild>
 									<Button
 										variant="ghost"
-										className="font-normal hover:opacity-50 hover:text-foreground hover:bg-transparent"
+										className="font-normal hover:opacity-50 hover:text-foreground hover:bg-transparent cursor-pointer"
 									>
 										{LANGUAGE_LABELS[lang](dictionary)}
 										<ChevronRight
@@ -142,7 +142,9 @@ export default function MobileNav({
 						</li>
 						<li>
 							<Link href="/contact" onClick={() => setOpen(false)}>
-								<Button>お問い合わせ</Button>
+								<Button className="cursor-pointer">
+									{dictionary.menu.contact}
+								</Button>
 							</Link>
 						</li>
 					</ul>

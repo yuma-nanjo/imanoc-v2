@@ -1,11 +1,11 @@
+import FacebookLogo from "@/components/brand/facebook";
+import LinkedinLogo from "@/components/brand/linkedin";
 import type { Locale } from "@/i18n-config";
 import type { POST_QUERYResult } from "@/sanity.types";
 import { urlFor } from "@/sanity/lib/image";
-import { Mail, Share } from "lucide-react";
+import { Share } from "lucide-react";
 import Image from "next/image";
 import PostDate from "./date";
-import FacebookLogo from "@/components/brand/facebook";
-import LinkedinLogo from "@/components/brand/linkedin";
 
 type PostHero = NonNullable<POST_QUERYResult>;
 

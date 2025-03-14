@@ -704,6 +704,31 @@
             "value": "form-contact"
           }
         },
+        "language": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "union",
+            "of": [
+              {
+                "type": "string",
+                "value": "ja"
+              },
+              {
+                "type": "string",
+                "value": "en"
+              },
+              {
+                "type": "string",
+                "value": "zh"
+              },
+              {
+                "type": "string",
+                "value": "zht"
+              }
+            ]
+          },
+          "optional": true
+        },
         "padding": {
           "type": "objectAttribute",
           "value": {
