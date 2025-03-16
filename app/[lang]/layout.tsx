@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/sonner";
 import { i18n, type Locale } from "@/i18n-config";
+import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 
 const isProduction = process.env.NEXT_PUBLIC_SITE_ENV === "production";
 
@@ -49,6 +50,7 @@ export default async function RootLayout({
 	return (
 		<html lang={lang} suppressHydrationWarning>
 			<link rel="icon" href="/favicon.ico" />
+			<GoogleTagManager gtmId="GTM-NMJP22G2" />
 			<body
 				className={cn(
 					"min-h-screen bg-background font-sans antialiased overscroll-none",
@@ -65,6 +67,7 @@ export default async function RootLayout({
 				</ThemeProvider>
 				<Toaster position="top-center" richColors />
 			</body>
+			<GoogleAnalytics gaId="G-TBE0CGZTJ8" />
 		</html>
 	);
 }

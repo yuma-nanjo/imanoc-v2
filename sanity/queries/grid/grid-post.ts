@@ -24,9 +24,10 @@ export const gridPostQuery = groq`
         },
         alt
       },
-      categories[]->{
+      category->{
         _id,
         title,
+        internationalizedTitle
       },
     },
   }

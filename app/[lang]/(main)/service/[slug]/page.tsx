@@ -31,7 +31,11 @@ export async function generateMetadata(props: {
 		notFound();
 	}
 
-	return generatePageMetadata({ page: service, slug: `/column/${slug}`, lang });
+	return generatePageMetadata({
+		page: service,
+		slug: `/service/${slug}`,
+		lang,
+	});
 }
 
 export default async function ServicePage(props: {
