@@ -87,11 +87,18 @@ export default defineType({
 			],
 		}),
 		defineField({
-			name: "categories",
-			title: "Categories",
+			name: "category",
+			title: "Category",
+			type: "reference",
+			group: "settings",
+			to: { type: "category" },
+		}),
+		defineField({
+			name: "tag",
+			title: "Tags",
 			type: "array",
 			group: "settings",
-			of: [{ type: "reference", to: { type: "category" } }],
+			of: [{ type: "reference", to: { type: "tag" } }],
 		}),
 		defineField({
 			name: "body",

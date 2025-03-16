@@ -58,7 +58,7 @@ export default async function CategoryPosts({
 									title={post?.title ?? ""}
 									excerpt={post?.excerpt ?? ""}
 									image={post?.image ?? null}
-									categories={post?.categories ?? []}
+									category={post?.category ?? null}
 									lang={lang || "ja"}
 								/>
 							</Link>
@@ -73,8 +73,7 @@ export default async function CategoryPosts({
 							{posts
 								.filter(
 									(post) =>
-										post?.categories &&
-										post.categories[0]?.title === category.title,
+										post?.category && post.category.title === category.title,
 								)
 								.map((post) => (
 									<Link
@@ -86,7 +85,7 @@ export default async function CategoryPosts({
 											title={post?.title ?? ""}
 											excerpt={post?.excerpt ?? ""}
 											image={post?.image ?? null}
-											categories={post?.categories ?? []}
+											category={post?.category ?? null}
 											lang={lang || "ja"}
 										/>
 									</Link>

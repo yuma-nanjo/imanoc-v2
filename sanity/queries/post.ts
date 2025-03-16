@@ -11,10 +11,7 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && lan
         mimeType,
         metadata {
           lqip,
-          dimensions {
-            width,
-            height
-          }
+          dimensions { width, height }
         }
       },
       alt
@@ -29,10 +26,7 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && lan
           mimeType,
           metadata {
             lqip,
-            dimensions {
-              width,
-              height
-            }
+            dimensions { width, height }
           }
         }
       }
@@ -47,10 +41,7 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && lan
           mimeType,
           metadata {
             lqip,
-            dimensions {
-              width,
-              height
-            }
+            dimensions { width, height }
           }
         },
         alt
@@ -65,18 +56,13 @@ export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug && lan
       asset->{
         _id,
         url,
-        metadata {
-          dimensions {
-            width,
-            height
-          }
-        }
+        metadata { dimensions { width, height } }
       },
     },
     "headings": body[style in ["h1", "h2", "h3", "h4", "h5", "h6"]]
 }`;
 
-export const POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && !("News" in categories[]->title)] | order(_createdAt desc){
+export const POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && category->title != "News"] | order(_createdAt desc){
     title,
     slug,
     excerpt,
@@ -85,41 +71,33 @@ export const POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language =
         _id,
         url,
         mimeType,
-        metadata {
-          lqip,
-          dimensions {
-            width,
-            height
-          }
-        }
+        metadata { lqip, dimensions { width, height } }
       },
       alt
     },
 }`;
 
-export const CATEGORY_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && !("News" in categories[]->title)] | order(_createdAt desc){
+export const CATEGORY_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && category->title != "News"] | order(_createdAt desc){
   title,
   slug,
   excerpt,
-  categories[]->{_id, title,internationalizedTitle},
+  category->{
+    _id,
+    title,
+    internationalizedTitle
+  },
   image{
     asset->{
       _id,
       url,
       mimeType,
-      metadata {
-        lqip,
-        dimensions {
-          width,
-          height
-        }
-      }
+      metadata { lqip, dimensions { width, height } }
     },
     alt
   },
 }`;
 
-export const NEWS_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && ("News" in categories[]->title)] | order(_createdAt desc){
+export const NEWS_POSTS_QUERY = groq`*[_type == "post" && defined(slug) && language == $language && category->title == "News"] | order(_createdAt desc){
   title,
   slug,
   _createdAt

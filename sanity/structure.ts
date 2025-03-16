@@ -39,7 +39,14 @@ export const structure = (S: any, context: any) =>
 				),
 			orderableDocumentListDeskItem({
 				type: "category",
-				title: "Categories",
+				title: "Category",
+				icon: BookA,
+				S,
+				context,
+			}),
+			orderableDocumentListDeskItem({
+				type: "tag",
+				title: "Tag",
 				icon: BookA,
 				S,
 				context,

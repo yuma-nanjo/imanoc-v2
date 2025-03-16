@@ -20,7 +20,7 @@ interface GridPostProps extends Omit<NonNullable<GridPost>, "_type" | "_key"> {
 export default function GridPost({ color, post, lang }: GridPostProps) {
 	if (!post) return null;
 
-	const { title, slug, excerpt, image, categories } = post;
+	const { title, slug, excerpt, image, category } = post;
 
 	return (
 		<Link
@@ -60,13 +60,11 @@ export default function GridPost({ color, post, lang }: GridPostProps) {
 							</h3>
 						</div>
 					)}
-					{categories && categories.length > 0 && (
+					{category && (
 						<div className="flex flex-wrap gap-2 mb-4">
-							{categories.map((category) => (
-								<Badge key={category._id} color="primary">
-									{category.title}
-								</Badge>
-							))}
+							<Badge key={category._id} color="primary">
+								{category.title}
+							</Badge>
 						</div>
 					)}
 					{excerpt && <p className="line-clamp-3">{excerpt}</p>}

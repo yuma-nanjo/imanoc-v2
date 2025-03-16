@@ -16,7 +16,7 @@ export default function CategoryPostCard({
 	title,
 	excerpt,
 	image,
-	categories,
+	category,
 	lang,
 }: CategoryPostCardProps) {
 	return (
@@ -53,14 +53,15 @@ export default function CategoryPostCard({
 				{excerpt && (
 					<p className="text-xs sm:text-sm line-clamp-3">{excerpt}</p>
 				)}
-				{categories?.map((cat) => (
+				{category && (
 					<span
-						className="absolute top-2 right-2 rounded-full px-2 py-1 bg-accent text-white text-xs font-mono shadow-sm font-semibold"
-						key={cat._id}
+						className="absolute top-2 right-2 rounded-full px-3 py-1 bg-accent text-white text-xs font-mono shadow-sm font-semibold"
+						key={category._id}
 					>
-						# {cat.internationalizedTitle?.find((t) => t._key === lang)?.value}
+						{category.internationalizedTitle?.find((cat) => cat._key === lang)
+							?.value ?? ""}
 					</span>
-				))}
+				)}
 			</div>
 		</div>
 	);
